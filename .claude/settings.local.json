@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where UV4.exe)",
+      "Read(//c/Keil_v5/UV4/**)",
+      "Read(//c/Keil/UV4/**)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Program Files \\(x86\\)/**)",
+      "Bash(ls -d /c/Keil*)",
+      "Bash(ls -d /d/Keil*)",
+      "Bash(ls -d /e/Keil*)",
+      "Bash(\"/d/Keil_v5/UV4/UV4.exe\" -b Project.uvprojx -o build_output.txt)",
+      "Bash(echo \"EXIT CODE: $?\")",
+      "Bash(git --version)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git status *)"
+    ]
+  }
+}
