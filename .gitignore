@@ -1,0 +1,13 @@
+# Build outputs
+Objects/
+
+# Keil uVision user-specific files
+Project.uvguix.*
+Project.uvoptx
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Debug logs
+JLinkLog.txt
+*.Depends
