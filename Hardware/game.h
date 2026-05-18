@@ -3,7 +3,7 @@
  * @brief   游戏大厅框架 - 共享帧缓冲引擎 + 游戏选择菜单
  *          支持横屏(128x64)和竖屏(64x128旋转90°)两种渲染模式
  *          提供统一的像素/精灵/字符绘制API和帧缓冲刷新接口
- *          管理3款游戏: 飞机大战、迷宫、三子棋
+ *          管理4款游戏: 飞机大战、迷宫、三子棋、俄罗斯方块
  */
 
 #ifndef __GAME_H
@@ -22,7 +22,8 @@ extern volatile uint32_t g_tick;
 #define GAME_PLANE   0                  /* 飞机大战 */
 #define GAME_MAZE    1                  /* 迷宫 */
 #define GAME_GOMOKU  2                  /* 三子棋 */
-#define GAME_COUNT   3                  /* 游戏总数 */
+#define GAME_TETRIS  3                  /* 俄罗斯方块 */
+#define GAME_COUNT   4                  /* 游戏总数 */
 
 /* ===== 帧缓冲API ===== */
 void fb_set_orientation(uint8_t orient); /* 设置屏幕方向(自动清屏) */
@@ -55,5 +56,12 @@ uint8_t Maze_Enter(void);                /* 进入迷宫 */
 uint8_t Maze_Loop(void);                 /* 迷宫循环 */
 uint8_t Gomoku_Enter(void);              /* 进入三子棋 */
 uint8_t Gomoku_Loop(void);               /* 三子棋循环 */
+uint8_t Tetris_Enter(void);              /* 进入俄罗斯方块 */
+uint8_t Tetris_Loop(void);               /* 俄罗斯方块循环 */
+
+/* ===== Flash高分存储(掉电不丢失) ===== */
+void    Flash_Load(void);                    /* 从Flash加载历史最高分(启动时调用一次) */
+uint16_t Flash_GetHigh(uint8_t game_id); /* 读取指定游戏的历史最高分 */
+void    Flash_SaveHigh(uint8_t game_id, uint16_t score); /* 更新最高分(仅在刷新纪录时写入Flash) */
 
 #endif

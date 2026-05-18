@@ -19,6 +19,7 @@ int main(void)
     /* 外设初始化 */
     Key_Init();                         /* 初始化4个按键(PB12-PB15, 上拉输入) */
     OLED_Init();                        /* 初始化OLED(I2C, PB8=SCL/PB9=SDA) */
+    Flash_Load();                       /* 从Flash加载历史最高分 */
     Game_Init();                        /* 初始化帧缓冲引擎 */
     Game_Enter();                       /* 进入游戏大厅主菜单 */
 

@@ -34,6 +34,7 @@
 ".\objects\plane.o"
 ".\objects\maze.o"
 ".\objects\gomoku.o"
+".\objects\tetris.o"
 ".\objects\main.o"
 ".\objects\stm32f10x_it.o"
 --library_type=microlib --strict --scatter ".\Objects\Project.sct"

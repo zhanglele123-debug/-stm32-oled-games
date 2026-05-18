@@ -3,11 +3,12 @@
  * @brief   游戏大厅 + 共享帧缓冲引擎实现
  *          帧缓冲: 1D数组 fb_buf[1024], 支持横屏(128x64)和竖屏(64x128)
  *          横屏刷新: 直接写入OLED; 竖屏刷新: 旋转90°后写入
- *          游戏大厅: 3个32x32程序化图标, K2/K3导航, K4选择, K1返回
+ *          游戏大厅: 带左右回滚的图标选择界面, K2/K3导航, K4选择
  *          每个游戏独立的*_Enter()和*_Loop()函数, 由大厅统一调度
  */
 
 #include "stm32f10x.h"                  /* STM32标准外设库 */
+#include "stm32f10x_flash.h"            /* Flash读写(高分存储) */
 #include "OLED.h"                       /* OLED驱动(OLED_SetCursor/WriteData) */
 #include "Key.h"                        /* 按键扫描 */
 #include "game.h"                       /* 游戏框架头文件 */
@@ -195,12 +196,31 @@ static void draw_gomoku_icon(uint8_t ox, uint8_t oy)
     fb_draw_pixel(ox + 19, oy + 19);
 }
 
+static void draw_tetris_icon(uint8_t ox, uint8_t oy)
+{
+    /* Board background */
+    fb_draw_rect(ox + 2, oy + 2, 28, 28);
+    /* Grid lines - 4x4 mini grid */
+    uint8_t i;
+    for (i = 0; i < 5; i++) {
+        fb_fill_rect(ox + 2, oy + 2 + i * 6, 28, 1);
+        fb_fill_rect(ox + 2 + i * 6, oy + 2, 1, 28);
+    }
+    /* T-piece (filled) */
+    fb_fill_rect(ox + 10, oy + 8,  4, 4);
+    fb_fill_rect(ox + 4,  oy + 14, 16, 4);
+    /* L-piece */
+    fb_fill_rect(ox + 16, oy + 20, 4, 4);
+    fb_fill_rect(ox + 10, oy + 20, 10, 4);
+}
+
 void fb_draw_icon(uint8_t x, uint8_t y, uint8_t game_id)
 {
     switch (game_id) {
     case GAME_PLANE:  draw_plane_icon(x, y);  break;
     case GAME_MAZE:   draw_maze_icon(x, y);   break;
     case GAME_GOMOKU: draw_gomoku_icon(x, y); break;
+    case GAME_TETRIS: draw_tetris_icon(x, y); break;
     }
 }
 
@@ -233,44 +253,35 @@ void fb_flush(void)
     }
 }
 
-/* ---- 精美暂停覆盖层(棋盘格暗化 + 双线框对话框) ---- */
+/* ---- 暂停覆盖层(清屏 + 双线框对话框 + 操作提示) ---- */
 void fb_draw_pause_overlay(void)
 {
-    uint8_t x, y;
     uint8_t w = fb_get_width();
     uint8_t h = fb_get_height();
 
-    /* 棋盘格暗化: 每隔一个像素清除, 产生50%暗化效果 */
-    for (y = 0; y < h; y++)
-        for (x = (y & 1); x < w; x += 2)
-            fb_clr_pixel(x, y);
+    fb_clear();                         /* 清屏, 不保留游戏画面作背景 */
 
-    /* 对话框参数(根据横竖屏精确居中) */
+    /* 对话框居中参数 */
     uint8_t dx, dy, dw, dh, tx, ty;
     if (w == 128) {                     /* 横屏 128x64 */
-        dw = 72; dh = 32;               /* 对话框大小 */
-        dx = (w - dw) / 2;              /* 水平居中: dx=28 */
-        dy = (h - dh) / 2 - 4;          /* 垂直居中偏上: dy=12 */
-        tx = dx + (dw - 48) / 2;        /* "PAUSED"(48px宽)水平居中: tx=40 */
-        ty = dy + (dh - 16) / 2;        /* 16px高文字垂直居中: ty=12+8=20 */
+        dw = 72; dh = 32;
+        dx = (w - dw) / 2;              /* dx=28 */
+        dy = (h - dh) / 2 - 2;          /* dy=14 */
+        tx = dx + (dw - 48) / 2;        /* "PAUSED"水平居中: tx=40 */
+        ty = dy + (dh - 16) / 2;        /* 文字垂直居中: ty=14+8=22 */
     } else {                            /* 竖屏 64x128 */
-        dw = 56; dh = 26;               /* 对话框大小 */
-        dx = (w - dw) / 2;              /* 水平居中: dx=4 */
-        dy = (h - dw) / 2;              /* 垂直居中: dy=51 */
-        tx = dx + (dw - 48) / 2;        /* "PAUSED"水平居中: tx=8 */
-        ty = dy + (dh - 16) / 2;        /* 16px高文字垂直居中: ty=51+5=56 */
+        dw = 56; dh = 26;
+        dx = (w - dw) / 2;              /* dx=4 */
+        dy = (h - dh) / 2;              /* dy=51 */
+        tx = dx + (dw - 48) / 2;        /* tx=8 */
+        ty = dy + (dh - 16) / 2;        /* ty=56 */
     }
 
-    /* 双线装饰边框 */
+    /* 双线边框 */
     fb_draw_rect(dx, dy, dw, dh);
     fb_draw_rect(dx + 1, dy + 1, dw - 2, dh - 2);
-    /* 四角装饰点 */
-    fb_draw_pixel(dx + 2, dy + 2);
-    fb_draw_pixel(dx + dw - 3, dy + 2);
-    fb_draw_pixel(dx + 2, dy + dh - 3);
-    fb_draw_pixel(dx + dw - 3, dy + dh - 3);
 
-    /* "PAUSED" 文字(精确定位居中) */
+    /* "PAUSED" 居中 */
     {
         const char *ps = "PAUSED";
         uint8_t i;
@@ -278,42 +289,57 @@ void fb_draw_pause_overlay(void)
             fb_draw_char(tx + i * 8, ty, ps[i]);
     }
 
-    /* 底部操作提示(对话框外, 屏幕下方) */
+    /* 底部操作提示: K4继续 K1退出 */
     if (w == 128) {
-        fb_draw_string(0, 3, "K4LONG:RESUME  K1:QUIT");
+        fb_draw_string(0, 3, "K4:GO");
+        fb_draw_string(80, 3, "K1:END");
     } else {
-        fb_draw_string(0, 6, "K4长按:继续");
-        fb_draw_string(0, 7, "K1:退出    ");
+        fb_draw_string(0, 6, "K4:GO");
+        fb_draw_string(0, 7, "K1:END");
     }
 }
 
 /* ---- Game hub ---- */
-static const uint8_t icon_xpos[GAME_COUNT] = {4, 48, 92};
+#define HUB_VISIBLE  3                  /* 屏幕上同时显示的图标数 */
 
-static void render_hub(uint8_t selected)
+static void render_hub(uint8_t selected, uint8_t ws)
 {
     uint8_t i;
+    const char *names[] = {"PLANE", "MAZE", "GOMOKU", "TETRIS"};
+
     fb_clear();
 
-    /* Title line 0 (y=0-15) */
+    /* Title */
     fb_draw_string(8, 0, "== GAME HUB ==");
 
-    /* Icons 32px at y=16, cover y=16-47 */
-    for (i = 0; i < GAME_COUNT; i++) {
-        fb_draw_icon(icon_xpos[i], 16, i);
-        if (i == selected) {
-            fb_draw_rect(icon_xpos[i] - 2, 14, 36, 36);
-            fb_draw_rect(icon_xpos[i] - 1, 15, 34, 34);
+    /* 循环模式下始终显示双向箭头(游戏数>可见数时) */
+    if (GAME_COUNT > HUB_VISIBLE) {
+        fb_fill_rect(0, 28, 3, 8);
+        fb_draw_pixel(1, 27); fb_draw_pixel(1, 36);
+        fb_fill_rect(125, 28, 3, 8);
+        fb_draw_pixel(126, 27); fb_draw_pixel(126, 36);
+    }
+
+    /* 固定3个图标显示位置, 游戏ID取模实现循环 */
+    {
+        const uint8_t lx_icon[] = {4, 48, 92};
+        for (i = 0; i < HUB_VISIBLE; i++) {
+            uint8_t gid = (ws + i) % GAME_COUNT;
+            fb_draw_icon(lx_icon[i], 16, gid);
+            if (gid == selected) {
+                fb_draw_rect(lx_icon[i] - 2, 14, 36, 36);
+                fb_draw_rect(lx_icon[i] - 1, 15, 34, 34);
+            }
         }
     }
 
-    /* Labels at y=48 (pages 6-7, below icons which end at y=47) */
+    /* 只显示选中游戏名称(居中, 避免重叠) */
     {
-        const char *names[] = {"PLANE", "MAZE", "GOMOKU"};
-        const uint8_t lx[] = {6, 50, 86};
-        for (i = 0; i < GAME_COUNT; i++) {
-            const char *s = names[i];
-            uint8_t cx = lx[i];
+        const char *s = names[selected];
+        uint8_t len = 0;
+        while (s[len]) len++;
+        {
+            uint8_t cx = (128 - len * 8) / 2;
             while (*s) { fb_draw_char(cx, 48, *s); cx += 8; s++; }
         }
     }
@@ -325,35 +351,42 @@ static void render_hub(uint8_t selected)
 void Game_Init(void)
 {
     fb_set_orientation(ORIENT_LANDSCAPE);
-    render_hub(0);
+    render_hub(0, (0 - 1 + GAME_COUNT) % GAME_COUNT);  /* 选中居中: ws=3 */
 }
 
 void Game_Enter(void)
 {
     fb_set_orientation(ORIENT_LANDSCAPE);
-    render_hub(0);
+    render_hub(0, (0 - 1 + GAME_COUNT) % GAME_COUNT);
 }
 
 uint8_t Game_Loop(void)
 {
     static uint8_t selected = 0;
+    static uint8_t ws = 0;              /* 窗口起始(左端图标对应的游戏ID) */
     static uint8_t in_game = 0;
     static uint8_t current_game = 0;
     static uint8_t prev_keys = 0;
+    static uint8_t nav_cd = 0;          /* 导航冷却(防双击/抖动重复触发) */
 
     uint8_t keys = Key_Scan();
     uint8_t press = keys & (keys ^ prev_keys);
     prev_keys = keys;
 
+    if (nav_cd > 0) nav_cd--;           /* 冷却递减 */
+
     if (!in_game) {
-        if (press & KEY1_MASK) return 1;
-        if (press & KEY2_MASK) {
-            if (selected > 0) selected--;
-            render_hub(selected);
+        if ((press & KEY2_MASK) && nav_cd == 0) {
+            selected = (selected - 1 + GAME_COUNT) % GAME_COUNT;
+            ws = (selected - 1 + GAME_COUNT) % GAME_COUNT;
+            render_hub(selected, ws);
+            nav_cd = 8;                 /* 8帧冷却(~160ms) */
         }
-        if (press & KEY3_MASK) {
-            if (selected < GAME_COUNT - 1) selected++;
-            render_hub(selected);
+        if ((press & KEY3_MASK) && nav_cd == 0) {
+            selected = (selected + 1) % GAME_COUNT;
+            ws = (selected - 1 + GAME_COUNT) % GAME_COUNT;
+            render_hub(selected, ws);
+            nav_cd = 8;
         }
         if (press & KEY4_MASK) {
             in_game = 1;
@@ -362,6 +395,7 @@ uint8_t Game_Loop(void)
             case GAME_PLANE:  Plane_Enter();  break;
             case GAME_MAZE:   Maze_Enter();   break;
             case GAME_GOMOKU: Gomoku_Enter(); break;
+            case GAME_TETRIS: Tetris_Enter(); break;
             }
         }
     } else {
@@ -370,12 +404,74 @@ uint8_t Game_Loop(void)
         case GAME_PLANE:  exit = Plane_Loop();  break;
         case GAME_MAZE:   exit = Maze_Loop();   break;
         case GAME_GOMOKU: exit = Gomoku_Loop(); break;
+        case GAME_TETRIS: exit = Tetris_Loop(); break;
         }
         if (exit) {
             in_game = 0;
             fb_set_orientation(ORIENT_LANDSCAPE);
-            render_hub(selected);
+            render_hub(selected, ws);
         }
     }
     return 0;
+}
+
+/* ===== Flash高分存储(掉电不丢失) ===== */
+#define FLASH_SAVE_ADDR  0x0800FC00     /* 64KB Flash最后一页(1KB) */
+#define FLASH_SAVE_MAGIC 0xABCD1234     /* 数据有效性校验 */
+
+typedef struct {
+    uint32_t magic;
+    uint16_t plane_high;
+    uint16_t tetris_high;
+} save_data_t;
+
+static save_data_t save_data;
+
+void Flash_Load(void)
+{
+    save_data_t *p = (save_data_t *)FLASH_SAVE_ADDR;
+    if (p->magic == FLASH_SAVE_MAGIC) {
+        save_data = *p;
+    } else {
+        /* 首次上电, 初始化空数据 */
+        save_data.magic = FLASH_SAVE_MAGIC;
+        save_data.plane_high = 0;
+        save_data.tetris_high = 0;
+    }
+}
+
+static void flash_write(void)
+{
+    uint32_t addr = FLASH_SAVE_ADDR;
+    uint16_t *src = (uint16_t *)&save_data;
+    uint8_t i;
+    __disable_irq();                    /* Flash写入时禁中断 */
+    FLASH_Unlock();
+    FLASH_ErasePage(FLASH_SAVE_ADDR);
+    for (i = 0; i < sizeof(save_data_t) / 2; i++) {
+        FLASH_ProgramHalfWord(addr, *src);
+        addr += 2;
+        src++;
+    }
+    FLASH_Lock();
+    __enable_irq();
+}
+
+uint16_t Flash_GetHigh(uint8_t game_id)
+{
+    if (game_id == GAME_PLANE)  return save_data.plane_high;
+    if (game_id == GAME_TETRIS) return save_data.tetris_high;
+    return 0;
+}
+
+void Flash_SaveHigh(uint8_t game_id, uint16_t score)
+{
+    if (game_id == GAME_PLANE && score > save_data.plane_high) {
+        save_data.plane_high = score;
+        flash_write();
+    }
+    if (game_id == GAME_TETRIS && score > save_data.tetris_high) {
+        save_data.tetris_high = score;
+        flash_write();
+    }
 }

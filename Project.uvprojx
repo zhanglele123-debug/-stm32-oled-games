@@ -755,6 +755,16 @@
               <FileType>5</FileType>
               <FilePath>.\Hardware\gomoku.h</FilePath>
             </File>
+            <File>
+              <FileName>tetris.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\tetris.c</FilePath>
+            </File>
+            <File>
+              <FileName>tetris.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\tetris.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -36,7 +36,7 @@ typedef struct { int16_t x, y; uint8_t active; } Object;
 typedef struct { uint8_t x, y, frame; uint8_t active; } Explosion;
 
 static uint8_t state, frame, fire_cd, player_x;
-static uint16_t score, high_score;
+static uint16_t score, high_score;       /* high_score 从Flash加载, 掉电保存 */
 static uint32_t rng;
 static Object bullets[MAX_BULLETS];
 static Object enemies[MAX_ENEMIES];
@@ -152,7 +152,7 @@ static void update(void) {
                     enemies[i].y++;
                     if (enemies[i].y >= PLAYER_Y - ENEMY_H) {
                         state = STATE_GAMEOVER;
-                        if (score > high_score) high_score = score;
+                        if (score > high_score) { high_score = score; Flash_SaveHigh(GAME_PLANE, score); }
                         return;
                     }
                 }
@@ -263,7 +263,7 @@ static void render_gameover(void) {
 uint8_t Plane_Enter(void) {
     fb_set_orientation(ORIENT_PORTRAIT);
     state = STATE_MENU;
-    score = 0; high_score = 0;
+    score = 0; high_score = Flash_GetHigh(GAME_PLANE);
     pause_snapshot = 0; k4_pause_hold = 0;
     render_menu();
     return 0;
@@ -308,7 +308,7 @@ uint8_t Plane_Loop(void) {
         }
         if (keys & KEY1_MASK) {         /* K1: 退出游戏 */
             state = STATE_GAMEOVER;
-            if (score > high_score) high_score = score;
+            if (score > high_score) { high_score = score; Flash_SaveHigh(GAME_PLANE, score); }
             render_gameover();
         }
         break;
@@ -316,7 +316,7 @@ uint8_t Plane_Loop(void) {
     case STATE_GAMEOVER:
         if (keys & KEY4_MASK) { reset(); state = STATE_PLAYING; }
         if (keys & KEY1_MASK) {
-            if (score > high_score) high_score = score;
+            if (score > high_score) { high_score = score; Flash_SaveHigh(GAME_PLANE, score); }
             state = STATE_MENU; render_menu(); return 1;
         }
         break;

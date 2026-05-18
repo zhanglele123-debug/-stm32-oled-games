@@ -14,7 +14,11 @@
       "Bash(git --version)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git status *)"
+      "Bash(git status *)",
+      "Bash(ls \"D:/Keil_v5/ARM/ARMCC/Bin/armcc.exe\" 2>/dev/null && echo \"ARMCC found\" || echo \"ARMCC not found at default path\")",
+      "Read(//d/Keil_v5/ARM/ARMCC/Bin/**)",
+      "Read(//d/Keil_v5/UV4/**)",
+      "Bash(\"D:/Keil_v5/UV4/UV4.exe\" -b \"Project.uvprojx\" -j0 -o \"build_verify.txt\")"
     ]
   }
 }

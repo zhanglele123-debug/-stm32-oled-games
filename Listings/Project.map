@@ -177,13 +177,17 @@ Section Cross References
     serial.o(i.USART1_IRQHandler) refers to serial.o(.data) for RxState
     serial.o(i.USART1_IRQHandler) refers to serial.o(.bss) for Serial_RxPacket
     serial.o(i.fputc) refers to serial.o(i.Serial_SendByte) for Serial_SendByte
-    key.o(i.Key_GetNum) refers to stm32f10x_gpio.o(i.GPIO_ReadInputDataBit) for GPIO_ReadInputDataBit
-    key.o(i.Key_GetNum) refers to delay.o(i.Delay_ms) for Delay_ms
+    key.o(i.Key_GetNum) refers to key.o(i.Key_Scan) for Key_Scan
     key.o(i.Key_GetPress) refers to key.o(i.Key_Scan) for Key_Scan
     key.o(i.Key_GetPress) refers to key.o(.data) for key_prev_state
     key.o(i.Key_Init) refers to stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
     key.o(i.Key_Init) refers to stm32f10x_gpio.o(i.GPIO_Init) for GPIO_Init
     key.o(i.Key_Scan) refers to stm32f10x_gpio.o(i.GPIO_ReadInputDataBit) for GPIO_ReadInputDataBit
+    key.o(i.Key_Scan) refers to key.o(.data) for db_ctr
+    game.o(i.Flash_GetHigh) refers to game.o(.data) for save_data
+    game.o(i.Flash_Load) refers to game.o(.data) for save_data
+    game.o(i.Flash_SaveHigh) refers to game.o(i.flash_write) for flash_write
+    game.o(i.Flash_SaveHigh) refers to game.o(.data) for save_data
     game.o(i.Game_Enter) refers to game.o(i.fb_set_orientation) for fb_set_orientation
     game.o(i.Game_Enter) refers to game.o(i.render_hub) for render_hub
     game.o(i.Game_Init) refers to game.o(i.fb_set_orientation) for fb_set_orientation
@@ -193,9 +197,11 @@ Section Cross References
     game.o(i.Game_Loop) refers to plane.o(i.Plane_Enter) for Plane_Enter
     game.o(i.Game_Loop) refers to maze.o(i.Maze_Enter) for Maze_Enter
     game.o(i.Game_Loop) refers to gomoku.o(i.Gomoku_Enter) for Gomoku_Enter
+    game.o(i.Game_Loop) refers to tetris.o(i.Tetris_Enter) for Tetris_Enter
     game.o(i.Game_Loop) refers to plane.o(i.Plane_Loop) for Plane_Loop
     game.o(i.Game_Loop) refers to maze.o(i.Maze_Loop) for Maze_Loop
     game.o(i.Game_Loop) refers to gomoku.o(i.Gomoku_Loop) for Gomoku_Loop
+    game.o(i.Game_Loop) refers to tetris.o(i.Tetris_Loop) for Tetris_Loop
     game.o(i.Game_Loop) refers to game.o(i.fb_set_orientation) for fb_set_orientation
     game.o(i.Game_Loop) refers to game.o(.data) for prev_keys
     game.o(i.draw_gomoku_icon) refers to game.o(i.fb_draw_rect) for fb_draw_rect
@@ -207,6 +213,8 @@ Section Cross References
     game.o(i.draw_plane_icon) refers to game.o(i.fb_fill_rect) for fb_fill_rect
     game.o(i.draw_plane_icon) refers to game.o(i.fb_clr_pixel) for fb_clr_pixel
     game.o(i.draw_plane_icon) refers to game.o(i.fb_draw_pixel) for fb_draw_pixel
+    game.o(i.draw_tetris_icon) refers to game.o(i.fb_draw_rect) for fb_draw_rect
+    game.o(i.draw_tetris_icon) refers to game.o(i.fb_fill_rect) for fb_fill_rect
     game.o(i.fb_clear) refers to game.o(.bss) for fb_buf
     game.o(i.fb_clear) refers to game.o(.data) for fb_w
     game.o(i.fb_clr_pixel) refers to game.o(.data) for fb_w
@@ -217,11 +225,11 @@ Section Cross References
     game.o(i.fb_draw_icon) refers to game.o(i.draw_plane_icon) for draw_plane_icon
     game.o(i.fb_draw_icon) refers to game.o(i.draw_maze_icon) for draw_maze_icon
     game.o(i.fb_draw_icon) refers to game.o(i.draw_gomoku_icon) for draw_gomoku_icon
+    game.o(i.fb_draw_icon) refers to game.o(i.draw_tetris_icon) for draw_tetris_icon
     game.o(i.fb_draw_pause_overlay) refers to game.o(i.fb_get_width) for fb_get_width
     game.o(i.fb_draw_pause_overlay) refers to game.o(i.fb_get_height) for fb_get_height
-    game.o(i.fb_draw_pause_overlay) refers to game.o(i.fb_clr_pixel) for fb_clr_pixel
+    game.o(i.fb_draw_pause_overlay) refers to game.o(i.fb_clear) for fb_clear
     game.o(i.fb_draw_pause_overlay) refers to game.o(i.fb_draw_rect) for fb_draw_rect
-    game.o(i.fb_draw_pause_overlay) refers to game.o(i.fb_draw_pixel) for fb_draw_pixel
     game.o(i.fb_draw_pause_overlay) refers to game.o(i.fb_draw_char) for fb_draw_char
     game.o(i.fb_draw_pause_overlay) refers to game.o(i.fb_draw_string) for fb_draw_string
     game.o(i.fb_draw_pixel) refers to game.o(.data) for fb_w
@@ -239,15 +247,23 @@ Section Cross References
     game.o(i.fb_get_width) refers to game.o(.data) for fb_w
     game.o(i.fb_set_orientation) refers to game.o(i.fb_clear) for fb_clear
     game.o(i.fb_set_orientation) refers to game.o(.data) for fb_orient
+    game.o(i.flash_write) refers to stm32f10x_flash.o(i.FLASH_Unlock) for FLASH_Unlock
+    game.o(i.flash_write) refers to stm32f10x_flash.o(i.FLASH_ErasePage) for FLASH_ErasePage
+    game.o(i.flash_write) refers to stm32f10x_flash.o(i.FLASH_ProgramHalfWord) for FLASH_ProgramHalfWord
+    game.o(i.flash_write) refers to stm32f10x_flash.o(i.FLASH_Lock) for FLASH_Lock
+    game.o(i.flash_write) refers to game.o(.data) for save_data
     game.o(i.render_hub) refers to game.o(i.fb_clear) for fb_clear
     game.o(i.render_hub) refers to game.o(i.fb_draw_string) for fb_draw_string
+    game.o(i.render_hub) refers to game.o(i.fb_fill_rect) for fb_fill_rect
+    game.o(i.render_hub) refers to game.o(i.fb_draw_pixel) for fb_draw_pixel
     game.o(i.render_hub) refers to game.o(i.fb_draw_icon) for fb_draw_icon
     game.o(i.render_hub) refers to game.o(i.fb_draw_rect) for fb_draw_rect
     game.o(i.render_hub) refers to game.o(i.fb_draw_char) for fb_draw_char
     game.o(i.render_hub) refers to game.o(i.fb_flush) for fb_flush
-    game.o(i.render_hub) refers to game.o(.constdata) for icon_xpos
+    game.o(i.render_hub) refers to game.o(.constdata) for .constdata
     game.o(.constdata) refers to game.o(.conststring) for .conststring
     plane.o(i.Plane_Enter) refers to game.o(i.fb_set_orientation) for fb_set_orientation
+    plane.o(i.Plane_Enter) refers to game.o(i.Flash_GetHigh) for Flash_GetHigh
     plane.o(i.Plane_Enter) refers to plane.o(i.render_menu) for render_menu
     plane.o(i.Plane_Enter) refers to plane.o(.data) for state
     plane.o(i.Plane_Loop) refers to key.o(i.Key_Scan) for Key_Scan
@@ -257,6 +273,7 @@ Section Cross References
     plane.o(i.Plane_Loop) refers to game.o(i.fb_flush) for fb_flush
     plane.o(i.Plane_Loop) refers to plane.o(i.render_gameover) for render_gameover
     plane.o(i.Plane_Loop) refers to game.o(i.fb_draw_pause_overlay) for fb_draw_pause_overlay
+    plane.o(i.Plane_Loop) refers to game.o(i.Flash_SaveHigh) for Flash_SaveHigh
     plane.o(i.Plane_Loop) refers to plane.o(i.render_menu) for render_menu
     plane.o(i.Plane_Loop) refers to plane.o(.data) for state
     plane.o(i.fire_bullet) refers to plane.o(.bss) for bullets
@@ -288,6 +305,7 @@ Section Cross References
     plane.o(i.update) refers to key.o(i.Key_Scan) for Key_Scan
     plane.o(i.update) refers to game.o(i.fb_get_width) for fb_get_width
     plane.o(i.update) refers to plane.o(i.fire_bullet) for fire_bullet
+    plane.o(i.update) refers to game.o(i.Flash_SaveHigh) for Flash_SaveHigh
     plane.o(i.update) refers to plane.o(i.spawn_enemy) for spawn_enemy
     plane.o(i.update) refers to plane.o(i.hit_test) for hit_test
     plane.o(i.update) refers to plane.o(i.spawn_explosion) for spawn_explosion
@@ -348,8 +366,76 @@ Section Cross References
     gomoku.o(i.render_board_frame) refers to gomoku.o(.data) for state
     gomoku.o(i.reset_board) refers to gomoku.o(.bss) for board
     gomoku.o(i.reset_board) refers to gomoku.o(.data) for cur_x
+    tetris.o(i.Tetris_Enter) refers to game.o(i.fb_set_orientation) for fb_set_orientation
+    tetris.o(i.Tetris_Enter) refers to tetris.o(i.render_menu) for render_menu
+    tetris.o(i.Tetris_Enter) refers to tetris.o(.data) for state
+    tetris.o(i.Tetris_Enter) refers to main.o(.data) for g_tick
+    tetris.o(i.Tetris_Loop) refers to key.o(i.Key_Scan) for Key_Scan
+    tetris.o(i.Tetris_Loop) refers to tetris.o(i.reset_game) for reset_game
+    tetris.o(i.Tetris_Loop) refers to tetris.o(i.render_game) for render_game
+    tetris.o(i.Tetris_Loop) refers to tetris.o(i.collides) for collides
+    tetris.o(i.Tetris_Loop) refers to tetris.o(i.drop_interval) for drop_interval
+    tetris.o(i.Tetris_Loop) refers to tetris.o(i.lock_piece) for lock_piece
+    tetris.o(i.Tetris_Loop) refers to tetris.o(i.clear_lines) for clear_lines
+    tetris.o(i.Tetris_Loop) refers to tetris.o(i.spawn_piece) for spawn_piece
+    tetris.o(i.Tetris_Loop) refers to game.o(i.Flash_SaveHigh) for Flash_SaveHigh
+    tetris.o(i.Tetris_Loop) refers to tetris.o(i.render_gameover) for render_gameover
+    tetris.o(i.Tetris_Loop) refers to game.o(i.fb_draw_pause_overlay) for fb_draw_pause_overlay
+    tetris.o(i.Tetris_Loop) refers to game.o(i.fb_flush) for fb_flush
+    tetris.o(i.Tetris_Loop) refers to tetris.o(i.render_menu) for render_menu
+    tetris.o(i.Tetris_Loop) refers to tetris.o(.data) for state
+    tetris.o(i.clear_lines) refers to tetris.o(.bss) for board
+    tetris.o(i.clear_lines) refers to tetris.o(.constdata) for pts
+    tetris.o(i.clear_lines) refers to tetris.o(.data) for score
+    tetris.o(i.collides) refers to tetris.o(.constdata) for PIECES
+    tetris.o(i.collides) refers to tetris.o(.bss) for board
+    tetris.o(i.draw_board_frame) refers to game.o(i.fb_draw_rect) for fb_draw_rect
+    tetris.o(i.draw_cell) refers to game.o(i.fb_fill_rect) for fb_fill_rect
+    tetris.o(i.draw_small_cell) refers to game.o(i.fb_fill_rect) for fb_fill_rect
+    tetris.o(i.drop_interval) refers to tetris.o(.data) for level
+    tetris.o(i.get_next_piece) refers to tetris.o(i.refill_bag) for refill_bag
+    tetris.o(i.get_next_piece) refers to tetris.o(.data) for bag_idx
+    tetris.o(i.lock_piece) refers to tetris.o(.constdata) for PIECES
+    tetris.o(i.lock_piece) refers to tetris.o(.data) for cur_piece
+    tetris.o(i.lock_piece) refers to tetris.o(.bss) for board
+    tetris.o(i.my_rand) refers to tetris.o(.data) for rng
+    tetris.o(i.refill_bag) refers to tetris.o(i.my_rand) for my_rand
+    tetris.o(i.refill_bag) refers to tetris.o(.data) for piece_bag
+    tetris.o(i.render_game) refers to game.o(i.fb_clear) for fb_clear
+    tetris.o(i.render_game) refers to game.o(i.fb_draw_string) for fb_draw_string
+    tetris.o(i.render_game) refers to tetris.o(i.draw_board_frame) for draw_board_frame
+    tetris.o(i.render_game) refers to tetris.o(i.draw_cell) for draw_cell
+    tetris.o(i.render_game) refers to game.o(i.fb_fill_rect) for fb_fill_rect
+    tetris.o(i.render_game) refers to tetris.o(i.render_preview) for render_preview
+    tetris.o(i.render_game) refers to game.o(i.fb_flush) for fb_flush
+    tetris.o(i.render_game) refers to tetris.o(.data) for score
+    tetris.o(i.render_game) refers to tetris.o(.bss) for board
+    tetris.o(i.render_game) refers to tetris.o(.constdata) for PIECES
+    tetris.o(i.render_gameover) refers to game.o(i.fb_clear) for fb_clear
+    tetris.o(i.render_gameover) refers to game.o(i.fb_draw_string) for fb_draw_string
+    tetris.o(i.render_gameover) refers to game.o(i.Flash_GetHigh) for Flash_GetHigh
+    tetris.o(i.render_gameover) refers to game.o(i.fb_flush) for fb_flush
+    tetris.o(i.render_gameover) refers to tetris.o(.data) for score
+    tetris.o(i.render_menu) refers to game.o(i.fb_clear) for fb_clear
+    tetris.o(i.render_menu) refers to game.o(i.fb_draw_string) for fb_draw_string
+    tetris.o(i.render_menu) refers to game.o(i.Flash_GetHigh) for Flash_GetHigh
+    tetris.o(i.render_menu) refers to game.o(i.fb_flush) for fb_flush
+    tetris.o(i.render_preview) refers to game.o(i.fb_draw_rect) for fb_draw_rect
+    tetris.o(i.render_preview) refers to tetris.o(i.draw_small_cell) for draw_small_cell
+    tetris.o(i.render_preview) refers to tetris.o(.constdata) for PIECES
+    tetris.o(i.render_preview) refers to tetris.o(.data) for next_piece
+    tetris.o(i.reset_game) refers to tetris.o(i.refill_bag) for refill_bag
+    tetris.o(i.reset_game) refers to tetris.o(i.get_next_piece) for get_next_piece
+    tetris.o(i.reset_game) refers to tetris.o(i.spawn_piece) for spawn_piece
+    tetris.o(i.reset_game) refers to tetris.o(.bss) for board
+    tetris.o(i.reset_game) refers to tetris.o(.data) for score
+    tetris.o(i.reset_game) refers to main.o(.data) for g_tick
+    tetris.o(i.spawn_piece) refers to tetris.o(i.get_next_piece) for get_next_piece
+    tetris.o(i.spawn_piece) refers to tetris.o(i.collides) for collides
+    tetris.o(i.spawn_piece) refers to tetris.o(.data) for next_piece
     main.o(i.main) refers to key.o(i.Key_Init) for Key_Init
     main.o(i.main) refers to oled.o(i.OLED_Init) for OLED_Init
+    main.o(i.main) refers to game.o(i.Flash_Load) for Flash_Load
     main.o(i.main) refers to game.o(i.Game_Init) for Game_Init
     main.o(i.main) refers to game.o(i.Game_Enter) for Game_Enter
     main.o(i.main) refers to game.o(i.Game_Loop) for Game_Loop
@@ -571,8 +657,6 @@ Removing Unused input sections from the image.
     Removing stm32f10x_flash.o(i.FLASH_EraseAllBank1Pages), (72 bytes).
     Removing stm32f10x_flash.o(i.FLASH_EraseAllPages), (72 bytes).
     Removing stm32f10x_flash.o(i.FLASH_EraseOptionBytes), (168 bytes).
-    Removing stm32f10x_flash.o(i.FLASH_ErasePage), (76 bytes).
-    Removing stm32f10x_flash.o(i.FLASH_GetBank1Status), (52 bytes).
     Removing stm32f10x_flash.o(i.FLASH_GetFlagStatus), (48 bytes).
     Removing stm32f10x_flash.o(i.FLASH_GetPrefetchBufferStatus), (24 bytes).
     Removing stm32f10x_flash.o(i.FLASH_GetReadOutProtectionStatus), (24 bytes).
@@ -581,19 +665,15 @@ Removing Unused input sections from the image.
     Removing stm32f10x_flash.o(i.FLASH_GetWriteProtectionOptionByte), (12 bytes).
     Removing stm32f10x_flash.o(i.FLASH_HalfCycleAccessCmd), (28 bytes).
     Removing stm32f10x_flash.o(i.FLASH_ITConfig), (32 bytes).
-    Removing stm32f10x_flash.o(i.FLASH_Lock), (20 bytes).
     Removing stm32f10x_flash.o(i.FLASH_LockBank1), (20 bytes).
     Removing stm32f10x_flash.o(i.FLASH_PrefetchBufferCmd), (28 bytes).
-    Removing stm32f10x_flash.o(i.FLASH_ProgramHalfWord), (64 bytes).
     Removing stm32f10x_flash.o(i.FLASH_ProgramOptionByteData), (84 bytes).
     Removing stm32f10x_flash.o(i.FLASH_ProgramWord), (108 bytes).
     Removing stm32f10x_flash.o(i.FLASH_ReadOutProtection), (172 bytes).
     Removing stm32f10x_flash.o(i.FLASH_SetLatency), (24 bytes).
-    Removing stm32f10x_flash.o(i.FLASH_Unlock), (24 bytes).
     Removing stm32f10x_flash.o(i.FLASH_UnlockBank1), (24 bytes).
     Removing stm32f10x_flash.o(i.FLASH_UserOptionByteConfig), (104 bytes).
     Removing stm32f10x_flash.o(i.FLASH_WaitForLastBank1Operation), (38 bytes).
-    Removing stm32f10x_flash.o(i.FLASH_WaitForLastOperation), (38 bytes).
     Removing stm32f10x_fsmc.o(i.FSMC_ClearFlag), (64 bytes).
     Removing stm32f10x_fsmc.o(i.FSMC_ClearITPendingBit), (72 bytes).
     Removing stm32f10x_fsmc.o(i.FSMC_GetECC), (28 bytes).
@@ -931,9 +1011,8 @@ Removing Unused input sections from the image.
     Removing serial.o(i.Serial_SendNumber), (58 bytes).
     Removing serial.o(i.Serial_SendString), (26 bytes).
     Removing serial.o(i.fputc), (16 bytes).
-    Removing key.o(i.Key_GetNum), (180 bytes).
+    Removing key.o(i.Key_GetNum), (110 bytes).
     Removing key.o(i.Key_GetPress), (32 bytes).
-    Removing key.o(.data), (1 bytes).
     Removing dadd.o(.text), (334 bytes).
     Removing dmul.o(.text), (228 bytes).
     Removing ddiv.o(.text), (222 bytes).
@@ -941,7 +1020,7 @@ Removing Unused input sections from the image.
     Removing cdrcmple.o(.text), (48 bytes).
     Removing depilogue.o(.text), (186 bytes).
 
-510 unused section(s) (total 22957 bytes) removed from the image.
+503 unused section(s) (total 22612 bytes) removed from the image.
 
 ==============================================================================
 
@@ -953,24 +1032,24 @@ Image Symbol Table
 
     ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12b.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
     ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stdout.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
@@ -986,6 +1065,7 @@ Image Symbol Table
     Hardware\gomoku.c                        0x00000000   Number         0  gomoku.o ABSOLUTE
     Hardware\maze.c                          0x00000000   Number         0  maze.o ABSOLUTE
     Hardware\plane.c                         0x00000000   Number         0  plane.o ABSOLUTE
+    Hardware\tetris.c                        0x00000000   Number         0  tetris.o ABSOLUTE
     Library\misc.c                           0x00000000   Number         0  misc.o ABSOLUTE
     Library\stm32f10x_adc.c                  0x00000000   Number         0  stm32f10x_adc.o ABSOLUTE
     Library\stm32f10x_bkp.c                  0x00000000   Number         0  stm32f10x_bkp.o ABSOLUTE
@@ -1037,183 +1117,263 @@ Image Symbol Table
     .text                                    0x08000128   Section       36  init.o(.text)
     i.BusFault_Handler                       0x0800014c   Section        0  stm32f10x_it.o(i.BusFault_Handler)
     i.DebugMon_Handler                       0x08000150   Section        0  stm32f10x_it.o(i.DebugMon_Handler)
-    i.GPIO_Init                              0x08000152   Section        0  stm32f10x_gpio.o(i.GPIO_Init)
-    i.GPIO_ReadInputDataBit                  0x08000268   Section        0  stm32f10x_gpio.o(i.GPIO_ReadInputDataBit)
-    i.GPIO_WriteBit                          0x0800027a   Section        0  stm32f10x_gpio.o(i.GPIO_WriteBit)
-    i.Game_Enter                             0x08000284   Section        0  game.o(i.Game_Enter)
-    i.Game_Init                              0x08000294   Section        0  game.o(i.Game_Init)
-    i.Game_Loop                              0x080002a4   Section        0  game.o(i.Game_Loop)
-    i.Gomoku_Enter                           0x080003a0   Section        0  gomoku.o(i.Gomoku_Enter)
-    i.Gomoku_Loop                            0x080003b4   Section        0  gomoku.o(i.Gomoku_Loop)
-    i.HardFault_Handler                      0x08000588   Section        0  stm32f10x_it.o(i.HardFault_Handler)
-    i.Key_Init                               0x0800058c   Section        0  key.o(i.Key_Init)
-    i.Key_Scan                               0x080005b8   Section        0  key.o(i.Key_Scan)
-    i.Maze_Enter                             0x08000604   Section        0  maze.o(i.Maze_Enter)
-    i.Maze_Loop                              0x08000644   Section        0  maze.o(i.Maze_Loop)
-    i.MemManage_Handler                      0x0800080c   Section        0  stm32f10x_it.o(i.MemManage_Handler)
-    i.NMI_Handler                            0x08000810   Section        0  stm32f10x_it.o(i.NMI_Handler)
-    i.OLED_Clear                             0x08000812   Section        0  oled.o(i.OLED_Clear)
-    i.OLED_I2C_Init                          0x0800083c   Section        0  oled.o(i.OLED_I2C_Init)
-    i.OLED_I2C_SendByte                      0x0800088c   Section        0  oled.o(i.OLED_I2C_SendByte)
-    i.OLED_I2C_Start                         0x080008e0   Section        0  oled.o(i.OLED_I2C_Start)
-    i.OLED_I2C_Stop                          0x08000914   Section        0  oled.o(i.OLED_I2C_Stop)
-    i.OLED_Init                              0x0800093c   Section        0  oled.o(i.OLED_Init)
-    i.OLED_SetCursor                         0x080009ea   Section        0  oled.o(i.OLED_SetCursor)
-    i.OLED_WriteCommand                      0x08000a0c   Section        0  oled.o(i.OLED_WriteCommand)
-    i.OLED_WriteData                         0x08000a2c   Section        0  oled.o(i.OLED_WriteData)
-    i.PendSV_Handler                         0x08000a4c   Section        0  stm32f10x_it.o(i.PendSV_Handler)
-    i.Plane_Enter                            0x08000a50   Section        0  plane.o(i.Plane_Enter)
-    i.Plane_Loop                             0x08000a8c   Section        0  plane.o(i.Plane_Loop)
-    i.RCC_APB2PeriphClockCmd                 0x08000bac   Section        0  stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd)
-    i.SVC_Handler                            0x08000bcc   Section        0  stm32f10x_it.o(i.SVC_Handler)
-    i.SetSysClock                            0x08000bce   Section        0  system_stm32f10x.o(i.SetSysClock)
-    SetSysClock                              0x08000bcf   Thumb Code     8  system_stm32f10x.o(i.SetSysClock)
-    i.SetSysClockTo72                        0x08000bd8   Section        0  system_stm32f10x.o(i.SetSysClockTo72)
-    SetSysClockTo72                          0x08000bd9   Thumb Code   214  system_stm32f10x.o(i.SetSysClockTo72)
-    i.SysTick_Handler                        0x08000cb8   Section        0  stm32f10x_it.o(i.SysTick_Handler)
-    i.SystemInit                             0x08000cbc   Section        0  system_stm32f10x.o(i.SystemInit)
-    i.USART1_IRQHandler                      0x08000d1c   Section        0  serial.o(i.USART1_IRQHandler)
-    i.USART_ClearITPendingBit                0x08000dbc   Section        0  stm32f10x_usart.o(i.USART_ClearITPendingBit)
-    i.USART_GetITStatus                      0x08000dda   Section        0  stm32f10x_usart.o(i.USART_GetITStatus)
-    i.USART_ReceiveData                      0x08000e2e   Section        0  stm32f10x_usart.o(i.USART_ReceiveData)
-    i.UsageFault_Handler                     0x08000e38   Section        0  stm32f10x_it.o(i.UsageFault_Handler)
-    i.__scatterload_copy                     0x08000e3c   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x08000e4a   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x08000e4c   Section       14  handlers.o(i.__scatterload_zeroinit)
-    i.check_win                              0x08000e5c   Section        0  gomoku.o(i.check_win)
-    check_win                                0x08000e5d   Thumb Code   212  gomoku.o(i.check_win)
-    i.draw_black_stone                       0x08000f34   Section        0  gomoku.o(i.draw_black_stone)
-    draw_black_stone                         0x08000f35   Thumb Code    60  gomoku.o(i.draw_black_stone)
-    i.draw_gomoku_icon                       0x08000f70   Section        0  game.o(i.draw_gomoku_icon)
-    draw_gomoku_icon                         0x08000f71   Thumb Code   248  game.o(i.draw_gomoku_icon)
-    i.draw_maze_icon                         0x08001068   Section        0  game.o(i.draw_maze_icon)
-    draw_maze_icon                           0x08001069   Thumb Code   378  game.o(i.draw_maze_icon)
-    i.draw_plane_icon                        0x080011e2   Section        0  game.o(i.draw_plane_icon)
-    draw_plane_icon                          0x080011e3   Thumb Code   212  game.o(i.draw_plane_icon)
-    i.draw_white_stone                       0x080012b6   Section        0  gomoku.o(i.draw_white_stone)
-    draw_white_stone                         0x080012b7   Thumb Code   144  gomoku.o(i.draw_white_stone)
-    i.fb_clear                               0x08001348   Section        0  game.o(i.fb_clear)
-    i.fb_clr_pixel                           0x08001374   Section        0  game.o(i.fb_clr_pixel)
-    i.fb_draw_char                           0x080013c4   Section        0  game.o(i.fb_draw_char)
-    i.fb_draw_icon                           0x080014ac   Section        0  game.o(i.fb_draw_icon)
-    i.fb_draw_pause_overlay                  0x080014e4   Section        0  game.o(i.fb_draw_pause_overlay)
-    i.fb_draw_pixel                          0x080016a4   Section        0  game.o(i.fb_draw_pixel)
-    i.fb_draw_rect                           0x080016f4   Section        0  game.o(i.fb_draw_rect)
-    i.fb_draw_sprite                         0x08001750   Section        0  game.o(i.fb_draw_sprite)
-    i.fb_draw_string                         0x08001828   Section        0  game.o(i.fb_draw_string)
-    i.fb_fill_rect                           0x08001850   Section        0  game.o(i.fb_fill_rect)
-    i.fb_flush                               0x08001884   Section        0  game.o(i.fb_flush)
-    i.fb_get_height                          0x08001944   Section        0  game.o(i.fb_get_height)
-    i.fb_get_width                           0x08001950   Section        0  game.o(i.fb_get_width)
-    i.fb_set_orientation                     0x0800195c   Section        0  game.o(i.fb_set_orientation)
-    i.fire_bullet                            0x080019a4   Section        0  plane.o(i.fire_bullet)
-    fire_bullet                              0x080019a5   Thumb Code    72  plane.o(i.fire_bullet)
-    i.gen_maze                               0x080019f4   Section        0  maze.o(i.gen_maze)
-    gen_maze                                 0x080019f5   Thumb Code   448  maze.o(i.gen_maze)
-    i.hit_test                               0x08001bdc   Section        0  plane.o(i.hit_test)
-    hit_test                                 0x08001bdd   Thumb Code    44  plane.o(i.hit_test)
-    i.main                                   0x08001c08   Section        0  main.o(i.main)
-    i.my_rand                                0x08001c30   Section        0  plane.o(i.my_rand)
-    my_rand                                  0x08001c31   Thumb Code    28  plane.o(i.my_rand)
-    i.my_rand                                0x08001c54   Section        0  maze.o(i.my_rand)
-    my_rand                                  0x08001c55   Thumb Code    28  maze.o(i.my_rand)
-    i.render_board_frame                     0x08001c78   Section        0  gomoku.o(i.render_board_frame)
-    render_board_frame                       0x08001c79   Thumb Code   438  gomoku.o(i.render_board_frame)
-    i.render_game_frame                      0x08001e94   Section        0  plane.o(i.render_game_frame)
-    render_game_frame                        0x08001e95   Thumb Code   314  plane.o(i.render_game_frame)
-    i.render_gameover                        0x08001ff8   Section        0  plane.o(i.render_gameover)
-    render_gameover                          0x08001ff9   Thumb Code   302  plane.o(i.render_gameover)
-    i.render_hub                             0x0800216c   Section        0  game.o(i.render_hub)
-    render_hub                               0x0800216d   Thumb Code   154  game.o(i.render_hub)
-    i.render_maze_frame                      0x08002224   Section        0  maze.o(i.render_maze_frame)
-    render_maze_frame                        0x08002225   Thumb Code   546  maze.o(i.render_maze_frame)
-    i.render_menu                            0x08002470   Section        0  plane.o(i.render_menu)
-    render_menu                              0x08002471   Thumb Code    82  plane.o(i.render_menu)
-    i.render_win                             0x08002518   Section        0  maze.o(i.render_win)
-    render_win                               0x08002519   Thumb Code    62  maze.o(i.render_win)
-    i.reset                                  0x0800259c   Section        0  plane.o(i.reset)
-    reset                                    0x0800259d   Thumb Code   146  plane.o(i.reset)
-    i.reset_board                            0x08002664   Section        0  gomoku.o(i.reset_board)
-    reset_board                              0x08002665   Thumb Code    78  gomoku.o(i.reset_board)
-    i.spawn_enemy                            0x080026dc   Section        0  plane.o(i.spawn_enemy)
-    spawn_enemy                              0x080026dd   Thumb Code    92  plane.o(i.spawn_enemy)
-    i.spawn_explosion                        0x0800273c   Section        0  plane.o(i.spawn_explosion)
-    spawn_explosion                          0x0800273d   Thumb Code    64  plane.o(i.spawn_explosion)
-    i.update                                 0x08002780   Section        0  plane.o(i.update)
-    update                                   0x08002781   Thumb Code   732  plane.o(i.update)
-    .constdata                               0x08002a8c   Section     2192  oled.o(.constdata)
-    .constdata                               0x0800331c   Section       16  game.o(.constdata)
-    icon_xpos                                0x0800331c   Data           3  game.o(.constdata)
-    .constdata                               0x0800332c   Section       45  plane.o(.constdata)
-    ship                                     0x0800332c   Data           9  plane.o(.constdata)
-    enemy_spr                                0x08003335   Data           8  plane.o(.constdata)
-    bullet_spr                               0x0800333d   Data           2  plane.o(.constdata)
-    expl_spr                                 0x0800333f   Data          16  plane.o(.constdata)
-    .constdata                               0x08003359   Section       16  maze.o(.constdata)
-    dx                                       0x08003359   Data           4  maze.o(.constdata)
-    dy                                       0x0800335d   Data           4  maze.o(.constdata)
-    wall_bit                                 0x08003361   Data           4  maze.o(.constdata)
-    opp_wall                                 0x08003365   Data           4  maze.o(.constdata)
-    .conststring                             0x0800336c   Section       23  game.o(.conststring)
+    i.FLASH_ErasePage                        0x08000154   Section        0  stm32f10x_flash.o(i.FLASH_ErasePage)
+    i.FLASH_GetBank1Status                   0x080001a0   Section        0  stm32f10x_flash.o(i.FLASH_GetBank1Status)
+    i.FLASH_Lock                             0x080001d4   Section        0  stm32f10x_flash.o(i.FLASH_Lock)
+    i.FLASH_ProgramHalfWord                  0x080001e8   Section        0  stm32f10x_flash.o(i.FLASH_ProgramHalfWord)
+    i.FLASH_Unlock                           0x08000228   Section        0  stm32f10x_flash.o(i.FLASH_Unlock)
+    i.FLASH_WaitForLastOperation             0x08000240   Section        0  stm32f10x_flash.o(i.FLASH_WaitForLastOperation)
+    i.Flash_GetHigh                          0x08000268   Section        0  game.o(i.Flash_GetHigh)
+    i.Flash_Load                             0x08000284   Section        0  game.o(i.Flash_Load)
+    i.Flash_SaveHigh                         0x080002b4   Section        0  game.o(i.Flash_SaveHigh)
+    i.GPIO_Init                              0x080002e8   Section        0  stm32f10x_gpio.o(i.GPIO_Init)
+    i.GPIO_ReadInputDataBit                  0x080003fe   Section        0  stm32f10x_gpio.o(i.GPIO_ReadInputDataBit)
+    i.GPIO_WriteBit                          0x08000410   Section        0  stm32f10x_gpio.o(i.GPIO_WriteBit)
+    i.Game_Enter                             0x0800041a   Section        0  game.o(i.Game_Enter)
+    i.Game_Init                              0x0800042c   Section        0  game.o(i.Game_Init)
+    i.Game_Loop                              0x08000440   Section        0  game.o(i.Game_Loop)
+    i.Gomoku_Enter                           0x080005b8   Section        0  gomoku.o(i.Gomoku_Enter)
+    i.Gomoku_Loop                            0x080005cc   Section        0  gomoku.o(i.Gomoku_Loop)
+    i.HardFault_Handler                      0x080007a0   Section        0  stm32f10x_it.o(i.HardFault_Handler)
+    i.Key_Init                               0x080007a4   Section        0  key.o(i.Key_Init)
+    i.Key_Scan                               0x080007d0   Section        0  key.o(i.Key_Scan)
+    i.Maze_Enter                             0x0800088c   Section        0  maze.o(i.Maze_Enter)
+    i.Maze_Loop                              0x080008cc   Section        0  maze.o(i.Maze_Loop)
+    i.MemManage_Handler                      0x08000a94   Section        0  stm32f10x_it.o(i.MemManage_Handler)
+    i.NMI_Handler                            0x08000a98   Section        0  stm32f10x_it.o(i.NMI_Handler)
+    i.OLED_Clear                             0x08000a9a   Section        0  oled.o(i.OLED_Clear)
+    i.OLED_I2C_Init                          0x08000ac4   Section        0  oled.o(i.OLED_I2C_Init)
+    i.OLED_I2C_SendByte                      0x08000b14   Section        0  oled.o(i.OLED_I2C_SendByte)
+    i.OLED_I2C_Start                         0x08000b68   Section        0  oled.o(i.OLED_I2C_Start)
+    i.OLED_I2C_Stop                          0x08000b9c   Section        0  oled.o(i.OLED_I2C_Stop)
+    i.OLED_Init                              0x08000bc4   Section        0  oled.o(i.OLED_Init)
+    i.OLED_SetCursor                         0x08000c72   Section        0  oled.o(i.OLED_SetCursor)
+    i.OLED_WriteCommand                      0x08000c94   Section        0  oled.o(i.OLED_WriteCommand)
+    i.OLED_WriteData                         0x08000cb4   Section        0  oled.o(i.OLED_WriteData)
+    i.PendSV_Handler                         0x08000cd4   Section        0  stm32f10x_it.o(i.PendSV_Handler)
+    i.Plane_Enter                            0x08000cd8   Section        0  plane.o(i.Plane_Enter)
+    i.Plane_Loop                             0x08000d18   Section        0  plane.o(i.Plane_Loop)
+    i.RCC_APB2PeriphClockCmd                 0x08000e4c   Section        0  stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd)
+    i.SVC_Handler                            0x08000e6c   Section        0  stm32f10x_it.o(i.SVC_Handler)
+    i.SetSysClock                            0x08000e6e   Section        0  system_stm32f10x.o(i.SetSysClock)
+    SetSysClock                              0x08000e6f   Thumb Code     8  system_stm32f10x.o(i.SetSysClock)
+    i.SetSysClockTo72                        0x08000e78   Section        0  system_stm32f10x.o(i.SetSysClockTo72)
+    SetSysClockTo72                          0x08000e79   Thumb Code   214  system_stm32f10x.o(i.SetSysClockTo72)
+    i.SysTick_Handler                        0x08000f58   Section        0  stm32f10x_it.o(i.SysTick_Handler)
+    i.SystemInit                             0x08000f5c   Section        0  system_stm32f10x.o(i.SystemInit)
+    i.Tetris_Enter                           0x08000fbc   Section        0  tetris.o(i.Tetris_Enter)
+    i.Tetris_Loop                            0x08000ffc   Section        0  tetris.o(i.Tetris_Loop)
+    i.USART1_IRQHandler                      0x0800132c   Section        0  serial.o(i.USART1_IRQHandler)
+    i.USART_ClearITPendingBit                0x080013cc   Section        0  stm32f10x_usart.o(i.USART_ClearITPendingBit)
+    i.USART_GetITStatus                      0x080013ea   Section        0  stm32f10x_usart.o(i.USART_GetITStatus)
+    i.USART_ReceiveData                      0x0800143e   Section        0  stm32f10x_usart.o(i.USART_ReceiveData)
+    i.UsageFault_Handler                     0x08001448   Section        0  stm32f10x_it.o(i.UsageFault_Handler)
+    i.__scatterload_copy                     0x0800144c   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x0800145a   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x0800145c   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i.check_win                              0x0800146c   Section        0  gomoku.o(i.check_win)
+    check_win                                0x0800146d   Thumb Code   212  gomoku.o(i.check_win)
+    i.clear_lines                            0x08001544   Section        0  tetris.o(i.clear_lines)
+    clear_lines                              0x08001545   Thumb Code   176  tetris.o(i.clear_lines)
+    i.collides                               0x08001608   Section        0  tetris.o(i.collides)
+    collides                                 0x08001609   Thumb Code   120  tetris.o(i.collides)
+    i.draw_black_stone                       0x08001688   Section        0  gomoku.o(i.draw_black_stone)
+    draw_black_stone                         0x08001689   Thumb Code    60  gomoku.o(i.draw_black_stone)
+    i.draw_board_frame                       0x080016c4   Section        0  tetris.o(i.draw_board_frame)
+    draw_board_frame                         0x080016c5   Thumb Code    32  tetris.o(i.draw_board_frame)
+    i.draw_cell                              0x080016e4   Section        0  tetris.o(i.draw_cell)
+    draw_cell                                0x080016e5   Thumb Code    40  tetris.o(i.draw_cell)
+    i.draw_gomoku_icon                       0x0800170c   Section        0  game.o(i.draw_gomoku_icon)
+    draw_gomoku_icon                         0x0800170d   Thumb Code   248  game.o(i.draw_gomoku_icon)
+    i.draw_maze_icon                         0x08001804   Section        0  game.o(i.draw_maze_icon)
+    draw_maze_icon                           0x08001805   Thumb Code   378  game.o(i.draw_maze_icon)
+    i.draw_plane_icon                        0x0800197e   Section        0  game.o(i.draw_plane_icon)
+    draw_plane_icon                          0x0800197f   Thumb Code   212  game.o(i.draw_plane_icon)
+    i.draw_small_cell                        0x08001a52   Section        0  tetris.o(i.draw_small_cell)
+    draw_small_cell                          0x08001a53   Thumb Code    20  tetris.o(i.draw_small_cell)
+    i.draw_tetris_icon                       0x08001a66   Section        0  game.o(i.draw_tetris_icon)
+    draw_tetris_icon                         0x08001a67   Thumb Code   162  game.o(i.draw_tetris_icon)
+    i.draw_white_stone                       0x08001b08   Section        0  gomoku.o(i.draw_white_stone)
+    draw_white_stone                         0x08001b09   Thumb Code   144  gomoku.o(i.draw_white_stone)
+    i.drop_interval                          0x08001b98   Section        0  tetris.o(i.drop_interval)
+    drop_interval                            0x08001b99   Thumb Code    26  tetris.o(i.drop_interval)
+    i.fb_clear                               0x08001bb8   Section        0  game.o(i.fb_clear)
+    i.fb_clr_pixel                           0x08001be4   Section        0  game.o(i.fb_clr_pixel)
+    i.fb_draw_char                           0x08001c34   Section        0  game.o(i.fb_draw_char)
+    i.fb_draw_icon                           0x08001d1c   Section        0  game.o(i.fb_draw_icon)
+    i.fb_draw_pause_overlay                  0x08001d60   Section        0  game.o(i.fb_draw_pause_overlay)
+    i.fb_draw_pixel                          0x08001e9c   Section        0  game.o(i.fb_draw_pixel)
+    i.fb_draw_rect                           0x08001eec   Section        0  game.o(i.fb_draw_rect)
+    i.fb_draw_sprite                         0x08001f48   Section        0  game.o(i.fb_draw_sprite)
+    i.fb_draw_string                         0x08002020   Section        0  game.o(i.fb_draw_string)
+    i.fb_fill_rect                           0x08002048   Section        0  game.o(i.fb_fill_rect)
+    i.fb_flush                               0x0800207c   Section        0  game.o(i.fb_flush)
+    i.fb_get_height                          0x0800213c   Section        0  game.o(i.fb_get_height)
+    i.fb_get_width                           0x08002148   Section        0  game.o(i.fb_get_width)
+    i.fb_set_orientation                     0x08002154   Section        0  game.o(i.fb_set_orientation)
+    i.fire_bullet                            0x0800219c   Section        0  plane.o(i.fire_bullet)
+    fire_bullet                              0x0800219d   Thumb Code    72  plane.o(i.fire_bullet)
+    i.flash_write                            0x080021ec   Section        0  game.o(i.flash_write)
+    flash_write                              0x080021ed   Thumb Code    50  game.o(i.flash_write)
+    i.gen_maze                               0x08002228   Section        0  maze.o(i.gen_maze)
+    gen_maze                                 0x08002229   Thumb Code   448  maze.o(i.gen_maze)
+    i.get_next_piece                         0x08002410   Section        0  tetris.o(i.get_next_piece)
+    get_next_piece                           0x08002411   Thumb Code    32  tetris.o(i.get_next_piece)
+    i.hit_test                               0x08002438   Section        0  plane.o(i.hit_test)
+    hit_test                                 0x08002439   Thumb Code    44  plane.o(i.hit_test)
+    i.lock_piece                             0x08002464   Section        0  tetris.o(i.lock_piece)
+    lock_piece                               0x08002465   Thumb Code   106  tetris.o(i.lock_piece)
+    i.main                                   0x080024e8   Section        0  main.o(i.main)
+    i.my_rand                                0x08002514   Section        0  plane.o(i.my_rand)
+    my_rand                                  0x08002515   Thumb Code    28  plane.o(i.my_rand)
+    i.my_rand                                0x08002538   Section        0  maze.o(i.my_rand)
+    my_rand                                  0x08002539   Thumb Code    28  maze.o(i.my_rand)
+    i.my_rand                                0x0800255c   Section        0  tetris.o(i.my_rand)
+    my_rand                                  0x0800255d   Thumb Code    28  tetris.o(i.my_rand)
+    i.refill_bag                             0x08002580   Section        0  tetris.o(i.refill_bag)
+    refill_bag                               0x08002581   Thumb Code    68  tetris.o(i.refill_bag)
+    i.render_board_frame                     0x080025cc   Section        0  gomoku.o(i.render_board_frame)
+    render_board_frame                       0x080025cd   Thumb Code   438  gomoku.o(i.render_board_frame)
+    i.render_game                            0x080027e8   Section        0  tetris.o(i.render_game)
+    render_game                              0x080027e9   Thumb Code   310  tetris.o(i.render_game)
+    i.render_game_frame                      0x08002960   Section        0  plane.o(i.render_game_frame)
+    render_game_frame                        0x08002961   Thumb Code   314  plane.o(i.render_game_frame)
+    i.render_gameover                        0x08002ac4   Section        0  plane.o(i.render_gameover)
+    render_gameover                          0x08002ac5   Thumb Code   302  plane.o(i.render_gameover)
+    i.render_gameover                        0x08002c38   Section        0  tetris.o(i.render_gameover)
+    render_gameover                          0x08002c39   Thumb Code   308  tetris.o(i.render_gameover)
+    i.render_hub                             0x08002dac   Section        0  game.o(i.render_hub)
+    render_hub                               0x08002dad   Thumb Code   256  game.o(i.render_hub)
+    i.render_maze_frame                      0x08002ec4   Section        0  maze.o(i.render_maze_frame)
+    render_maze_frame                        0x08002ec5   Thumb Code   546  maze.o(i.render_maze_frame)
+    i.render_menu                            0x08003110   Section        0  plane.o(i.render_menu)
+    render_menu                              0x08003111   Thumb Code    82  plane.o(i.render_menu)
+    i.render_menu                            0x080031b8   Section        0  tetris.o(i.render_menu)
+    render_menu                              0x080031b9   Thumb Code   148  tetris.o(i.render_menu)
+    i.render_preview                         0x08003294   Section        0  tetris.o(i.render_preview)
+    render_preview                           0x08003295   Thumb Code    80  tetris.o(i.render_preview)
+    i.render_win                             0x080032ec   Section        0  maze.o(i.render_win)
+    render_win                               0x080032ed   Thumb Code    62  maze.o(i.render_win)
+    i.reset                                  0x08003370   Section        0  plane.o(i.reset)
+    reset                                    0x08003371   Thumb Code   146  plane.o(i.reset)
+    i.reset_board                            0x08003438   Section        0  gomoku.o(i.reset_board)
+    reset_board                              0x08003439   Thumb Code    78  gomoku.o(i.reset_board)
+    i.reset_game                             0x080034b0   Section        0  tetris.o(i.reset_game)
+    reset_game                               0x080034b1   Thumb Code   108  tetris.o(i.reset_game)
+    i.spawn_enemy                            0x0800354c   Section        0  plane.o(i.spawn_enemy)
+    spawn_enemy                              0x0800354d   Thumb Code    92  plane.o(i.spawn_enemy)
+    i.spawn_explosion                        0x080035ac   Section        0  plane.o(i.spawn_explosion)
+    spawn_explosion                          0x080035ad   Thumb Code    64  plane.o(i.spawn_explosion)
+    i.spawn_piece                            0x080035f0   Section        0  tetris.o(i.spawn_piece)
+    spawn_piece                              0x080035f1   Thumb Code    70  tetris.o(i.spawn_piece)
+    i.update                                 0x0800364c   Section        0  plane.o(i.update)
+    update                                   0x0800364d   Thumb Code   746  plane.o(i.update)
+    .constdata                               0x08003968   Section     2192  oled.o(.constdata)
+    .constdata                               0x080041f8   Section       16  game.o(.constdata)
+    .constdata                               0x08004208   Section       45  plane.o(.constdata)
+    ship                                     0x08004208   Data           9  plane.o(.constdata)
+    enemy_spr                                0x08004211   Data           8  plane.o(.constdata)
+    bullet_spr                               0x08004219   Data           2  plane.o(.constdata)
+    expl_spr                                 0x0800421b   Data          16  plane.o(.constdata)
+    .constdata                               0x08004235   Section       16  maze.o(.constdata)
+    dx                                       0x08004235   Data           4  maze.o(.constdata)
+    dy                                       0x08004239   Data           4  maze.o(.constdata)
+    wall_bit                                 0x0800423d   Data           4  maze.o(.constdata)
+    opp_wall                                 0x08004241   Data           4  maze.o(.constdata)
+    .constdata                               0x08004246   Section      122  tetris.o(.constdata)
+    PIECES                                   0x08004246   Data         112  tetris.o(.constdata)
+    pts                                      0x080042b6   Data          10  tetris.o(.constdata)
+    .conststring                             0x080042c0   Section       31  game.o(.conststring)
     .data                                    0x20000000   Section        3  serial.o(.data)
     RxState                                  0x20000001   Data           1  serial.o(.data)
     pRxPacket                                0x20000002   Data           1  serial.o(.data)
-    .data                                    0x20000003   Section        8  game.o(.data)
-    fb_w                                     0x20000003   Data           1  game.o(.data)
-    fb_h                                     0x20000004   Data           1  game.o(.data)
-    fb_pages                                 0x20000005   Data           1  game.o(.data)
-    fb_orient                                0x20000006   Data           1  game.o(.data)
-    selected                                 0x20000007   Data           1  game.o(.data)
-    in_game                                  0x20000008   Data           1  game.o(.data)
-    current_game                             0x20000009   Data           1  game.o(.data)
-    prev_keys                                0x2000000a   Data           1  game.o(.data)
-    .data                                    0x2000000c   Section       16  plane.o(.data)
-    state                                    0x2000000c   Data           1  plane.o(.data)
-    frame                                    0x2000000d   Data           1  plane.o(.data)
-    fire_cd                                  0x2000000e   Data           1  plane.o(.data)
-    player_x                                 0x2000000f   Data           1  plane.o(.data)
-    score                                    0x20000010   Data           2  plane.o(.data)
-    high_score                               0x20000012   Data           2  plane.o(.data)
-    rng                                      0x20000014   Data           4  plane.o(.data)
-    pause_snapshot                           0x20000018   Data           1  plane.o(.data)
-    k4_pause_hold                            0x20000019   Data           1  plane.o(.data)
-    k4_prev_state                            0x2000001a   Data           1  plane.o(.data)
-    k4_start_lock                            0x2000001b   Data           1  plane.o(.data)
-    .data                                    0x2000001c   Section       13  maze.o(.data)
-    px                                       0x2000001c   Data           1  maze.o(.data)
-    py                                       0x2000001d   Data           1  maze.o(.data)
-    state                                    0x2000001e   Data           1  maze.o(.data)
-    rng                                      0x20000020   Data           4  maze.o(.data)
-    pause_hold                               0x20000024   Data           1  maze.o(.data)
-    pause_snapshot                           0x20000025   Data           1  maze.o(.data)
-    stack_sp                                 0x20000026   Data           2  maze.o(.data)
-    prev_k                                   0x20000028   Data           1  maze.o(.data)
-    .data                                    0x20000029   Section       10  gomoku.o(.data)
-    cur_x                                    0x20000029   Data           1  gomoku.o(.data)
-    cur_y                                    0x2000002a   Data           1  gomoku.o(.data)
-    turn                                     0x2000002b   Data           1  gomoku.o(.data)
-    state                                    0x2000002c   Data           1  gomoku.o(.data)
-    winner                                   0x2000002d   Data           1  gomoku.o(.data)
-    k4_hold                                  0x2000002e   Data           1  gomoku.o(.data)
-    blink_ctr                                0x2000002f   Data           1  gomoku.o(.data)
-    pause_hold                               0x20000030   Data           1  gomoku.o(.data)
-    pause_snapshot                           0x20000031   Data           1  gomoku.o(.data)
-    prev_k                                   0x20000032   Data           1  gomoku.o(.data)
-    .data                                    0x20000034   Section        4  main.o(.data)
-    .bss                                     0x20000038   Section      300  serial.o(.bss)
-    .bss                                     0x20000164   Section     1024  game.o(.bss)
-    fb_buf                                   0x20000164   Data        1024  game.o(.bss)
-    .bss                                     0x20000564   Section       60  plane.o(.bss)
-    bullets                                  0x20000564   Data          18  plane.o(.bss)
-    enemies                                  0x20000576   Data          30  plane.o(.bss)
-    explosions                               0x20000594   Data          12  plane.o(.bss)
-    .bss                                     0x200005a0   Section      692  maze.o(.bss)
-    maze                                     0x200005a0   Data         180  maze.o(.bss)
-    stack_x                                  0x20000654   Data         256  maze.o(.bss)
-    stack_y                                  0x20000754   Data         256  maze.o(.bss)
-    .bss                                     0x20000854   Section       64  gomoku.o(.bss)
-    board                                    0x20000854   Data          64  gomoku.o(.bss)
-    STACK                                    0x20000898   Section     1024  startup_stm32f10x_md.o(STACK)
+    .data                                    0x20000003   Section        6  key.o(.data)
+    db_state                                 0x20000003   Data           1  key.o(.data)
+    db_ctr                                   0x20000004   Data           4  key.o(.data)
+    key_prev_state                           0x20000008   Data           1  key.o(.data)
+    .data                                    0x2000000c   Section       18  game.o(.data)
+    fb_w                                     0x2000000c   Data           1  game.o(.data)
+    fb_h                                     0x2000000d   Data           1  game.o(.data)
+    fb_pages                                 0x2000000e   Data           1  game.o(.data)
+    fb_orient                                0x2000000f   Data           1  game.o(.data)
+    save_data                                0x20000010   Data           8  game.o(.data)
+    selected                                 0x20000018   Data           1  game.o(.data)
+    ws                                       0x20000019   Data           1  game.o(.data)
+    in_game                                  0x2000001a   Data           1  game.o(.data)
+    current_game                             0x2000001b   Data           1  game.o(.data)
+    prev_keys                                0x2000001c   Data           1  game.o(.data)
+    nav_cd                                   0x2000001d   Data           1  game.o(.data)
+    .data                                    0x20000020   Section       16  plane.o(.data)
+    state                                    0x20000020   Data           1  plane.o(.data)
+    frame                                    0x20000021   Data           1  plane.o(.data)
+    fire_cd                                  0x20000022   Data           1  plane.o(.data)
+    player_x                                 0x20000023   Data           1  plane.o(.data)
+    score                                    0x20000024   Data           2  plane.o(.data)
+    high_score                               0x20000026   Data           2  plane.o(.data)
+    rng                                      0x20000028   Data           4  plane.o(.data)
+    pause_snapshot                           0x2000002c   Data           1  plane.o(.data)
+    k4_pause_hold                            0x2000002d   Data           1  plane.o(.data)
+    k4_prev_state                            0x2000002e   Data           1  plane.o(.data)
+    k4_start_lock                            0x2000002f   Data           1  plane.o(.data)
+    .data                                    0x20000030   Section       13  maze.o(.data)
+    px                                       0x20000030   Data           1  maze.o(.data)
+    py                                       0x20000031   Data           1  maze.o(.data)
+    state                                    0x20000032   Data           1  maze.o(.data)
+    rng                                      0x20000034   Data           4  maze.o(.data)
+    pause_hold                               0x20000038   Data           1  maze.o(.data)
+    pause_snapshot                           0x20000039   Data           1  maze.o(.data)
+    stack_sp                                 0x2000003a   Data           2  maze.o(.data)
+    prev_k                                   0x2000003c   Data           1  maze.o(.data)
+    .data                                    0x2000003d   Section       10  gomoku.o(.data)
+    cur_x                                    0x2000003d   Data           1  gomoku.o(.data)
+    cur_y                                    0x2000003e   Data           1  gomoku.o(.data)
+    turn                                     0x2000003f   Data           1  gomoku.o(.data)
+    state                                    0x20000040   Data           1  gomoku.o(.data)
+    winner                                   0x20000041   Data           1  gomoku.o(.data)
+    k4_hold                                  0x20000042   Data           1  gomoku.o(.data)
+    blink_ctr                                0x20000043   Data           1  gomoku.o(.data)
+    pause_hold                               0x20000044   Data           1  gomoku.o(.data)
+    pause_snapshot                           0x20000045   Data           1  gomoku.o(.data)
+    prev_k                                   0x20000046   Data           1  gomoku.o(.data)
+    .data                                    0x20000048   Section       33  tetris.o(.data)
+    state                                    0x20000048   Data           1  tetris.o(.data)
+    cur_piece                                0x20000049   Data           1  tetris.o(.data)
+    cur_rot                                  0x2000004a   Data           1  tetris.o(.data)
+    next_piece                               0x2000004b   Data           1  tetris.o(.data)
+    cur_x                                    0x2000004c   Data           1  tetris.o(.data)
+    cur_y                                    0x2000004d   Data           1  tetris.o(.data)
+    score                                    0x2000004e   Data           2  tetris.o(.data)
+    level                                    0x20000050   Data           1  tetris.o(.data)
+    lines                                    0x20000052   Data           2  tetris.o(.data)
+    rng                                      0x20000054   Data           4  tetris.o(.data)
+    frame                                    0x20000058   Data           1  tetris.o(.data)
+    drop_timer                               0x20000059   Data           1  tetris.o(.data)
+    pixel_offset                             0x2000005a   Data           1  tetris.o(.data)
+    pause_snapshot                           0x2000005b   Data           1  tetris.o(.data)
+    piece_bag                                0x2000005c   Data           7  tetris.o(.data)
+    bag_idx                                  0x20000063   Data           1  tetris.o(.data)
+    prev_keys                                0x20000064   Data           1  tetris.o(.data)
+    k4_prev                                  0x20000065   Data           1  tetris.o(.data)
+    k1_hold                                  0x20000066   Data           1  tetris.o(.data)
+    k2_hold                                  0x20000067   Data           1  tetris.o(.data)
+    k4_p_prev                                0x20000068   Data           1  tetris.o(.data)
+    .data                                    0x2000006c   Section        4  main.o(.data)
+    .bss                                     0x20000070   Section      300  serial.o(.bss)
+    .bss                                     0x2000019c   Section     1024  game.o(.bss)
+    fb_buf                                   0x2000019c   Data        1024  game.o(.bss)
+    .bss                                     0x2000059c   Section       60  plane.o(.bss)
+    bullets                                  0x2000059c   Data          18  plane.o(.bss)
+    enemies                                  0x200005ae   Data          30  plane.o(.bss)
+    explosions                               0x200005cc   Data          12  plane.o(.bss)
+    .bss                                     0x200005d8   Section      692  maze.o(.bss)
+    maze                                     0x200005d8   Data         180  maze.o(.bss)
+    stack_x                                  0x2000068c   Data         256  maze.o(.bss)
+    stack_y                                  0x2000078c   Data         256  maze.o(.bss)
+    .bss                                     0x2000088c   Section       64  gomoku.o(.bss)
+    board                                    0x2000088c   Data          64  gomoku.o(.bss)
+    .bss                                     0x200008cc   Section      200  tetris.o(.bss)
+    board                                    0x200008cc   Data         200  tetris.o(.bss)
+    STACK                                    0x20000998   Section     1024  startup_stm32f10x_md.o(STACK)
 
     Global Symbols
 
@@ -1287,68 +1447,79 @@ Image Symbol Table
     __scatterload_rt2                        0x08000129   Thumb Code     0  init.o(.text)
     BusFault_Handler                         0x0800014d   Thumb Code     4  stm32f10x_it.o(i.BusFault_Handler)
     DebugMon_Handler                         0x08000151   Thumb Code     2  stm32f10x_it.o(i.DebugMon_Handler)
-    GPIO_Init                                0x08000153   Thumb Code   278  stm32f10x_gpio.o(i.GPIO_Init)
-    GPIO_ReadInputDataBit                    0x08000269   Thumb Code    18  stm32f10x_gpio.o(i.GPIO_ReadInputDataBit)
-    GPIO_WriteBit                            0x0800027b   Thumb Code    10  stm32f10x_gpio.o(i.GPIO_WriteBit)
-    Game_Enter                               0x08000285   Thumb Code    16  game.o(i.Game_Enter)
-    Game_Init                                0x08000295   Thumb Code    16  game.o(i.Game_Init)
-    Game_Loop                                0x080002a5   Thumb Code   234  game.o(i.Game_Loop)
-    Gomoku_Enter                             0x080003a1   Thumb Code    20  gomoku.o(i.Gomoku_Enter)
-    Gomoku_Loop                              0x080003b5   Thumb Code   426  gomoku.o(i.Gomoku_Loop)
-    HardFault_Handler                        0x08000589   Thumb Code     4  stm32f10x_it.o(i.HardFault_Handler)
-    Key_Init                                 0x0800058d   Thumb Code    40  key.o(i.Key_Init)
-    Key_Scan                                 0x080005b9   Thumb Code    72  key.o(i.Key_Scan)
-    Maze_Enter                               0x08000605   Thumb Code    42  maze.o(i.Maze_Enter)
-    Maze_Loop                                0x08000645   Thumb Code   426  maze.o(i.Maze_Loop)
-    MemManage_Handler                        0x0800080d   Thumb Code     4  stm32f10x_it.o(i.MemManage_Handler)
-    NMI_Handler                              0x08000811   Thumb Code     2  stm32f10x_it.o(i.NMI_Handler)
-    OLED_Clear                               0x08000813   Thumb Code    42  oled.o(i.OLED_Clear)
-    OLED_I2C_Init                            0x0800083d   Thumb Code    76  oled.o(i.OLED_I2C_Init)
-    OLED_I2C_SendByte                        0x0800088d   Thumb Code    80  oled.o(i.OLED_I2C_SendByte)
-    OLED_I2C_Start                           0x080008e1   Thumb Code    48  oled.o(i.OLED_I2C_Start)
-    OLED_I2C_Stop                            0x08000915   Thumb Code    36  oled.o(i.OLED_I2C_Stop)
-    OLED_Init                                0x0800093d   Thumb Code   174  oled.o(i.OLED_Init)
-    OLED_SetCursor                           0x080009eb   Thumb Code    34  oled.o(i.OLED_SetCursor)
-    OLED_WriteCommand                        0x08000a0d   Thumb Code    32  oled.o(i.OLED_WriteCommand)
-    OLED_WriteData                           0x08000a2d   Thumb Code    32  oled.o(i.OLED_WriteData)
-    PendSV_Handler                           0x08000a4d   Thumb Code     2  stm32f10x_it.o(i.PendSV_Handler)
-    Plane_Enter                              0x08000a51   Thumb Code    38  plane.o(i.Plane_Enter)
-    Plane_Loop                               0x08000a8d   Thumb Code   266  plane.o(i.Plane_Loop)
-    RCC_APB2PeriphClockCmd                   0x08000bad   Thumb Code    26  stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd)
-    SVC_Handler                              0x08000bcd   Thumb Code     2  stm32f10x_it.o(i.SVC_Handler)
-    SysTick_Handler                          0x08000cb9   Thumb Code     2  stm32f10x_it.o(i.SysTick_Handler)
-    SystemInit                               0x08000cbd   Thumb Code    78  system_stm32f10x.o(i.SystemInit)
-    USART1_IRQHandler                        0x08000d1d   Thumb Code   140  serial.o(i.USART1_IRQHandler)
-    USART_ClearITPendingBit                  0x08000dbd   Thumb Code    30  stm32f10x_usart.o(i.USART_ClearITPendingBit)
-    USART_GetITStatus                        0x08000ddb   Thumb Code    84  stm32f10x_usart.o(i.USART_GetITStatus)
-    USART_ReceiveData                        0x08000e2f   Thumb Code    10  stm32f10x_usart.o(i.USART_ReceiveData)
-    UsageFault_Handler                       0x08000e39   Thumb Code     4  stm32f10x_it.o(i.UsageFault_Handler)
-    __scatterload_copy                       0x08000e3d   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x08000e4b   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x08000e4d   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    fb_clear                                 0x08001349   Thumb Code    30  game.o(i.fb_clear)
-    fb_clr_pixel                             0x08001375   Thumb Code    62  game.o(i.fb_clr_pixel)
-    fb_draw_char                             0x080013c5   Thumb Code   214  game.o(i.fb_draw_char)
-    fb_draw_icon                             0x080014ad   Thumb Code    54  game.o(i.fb_draw_icon)
-    fb_draw_pause_overlay                    0x080014e5   Thumb Code   382  game.o(i.fb_draw_pause_overlay)
-    fb_draw_pixel                            0x080016a5   Thumb Code    64  game.o(i.fb_draw_pixel)
-    fb_draw_rect                             0x080016f5   Thumb Code    90  game.o(i.fb_draw_rect)
-    fb_draw_sprite                           0x08001751   Thumb Code   202  game.o(i.fb_draw_sprite)
-    fb_draw_string                           0x08001829   Thumb Code    40  game.o(i.fb_draw_string)
-    fb_fill_rect                             0x08001851   Thumb Code    52  game.o(i.fb_fill_rect)
-    fb_flush                                 0x08001885   Thumb Code   176  game.o(i.fb_flush)
-    fb_get_height                            0x08001945   Thumb Code     6  game.o(i.fb_get_height)
-    fb_get_width                             0x08001951   Thumb Code     6  game.o(i.fb_get_width)
-    fb_set_orientation                       0x0800195d   Thumb Code    54  game.o(i.fb_set_orientation)
-    main                                     0x08001c09   Thumb Code    34  main.o(i.main)
-    OLED_Character                           0x08002a8c   Data         672  oled.o(.constdata)
-    OLED_F8x16                               0x08002d2c   Data        1520  oled.o(.constdata)
-    Region$$Table$$Base                      0x08003384   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x080033a4   Number         0  anon$$obj.o(Region$$Table)
+    FLASH_ErasePage                          0x08000155   Thumb Code    72  stm32f10x_flash.o(i.FLASH_ErasePage)
+    FLASH_GetBank1Status                     0x080001a1   Thumb Code    48  stm32f10x_flash.o(i.FLASH_GetBank1Status)
+    FLASH_Lock                               0x080001d5   Thumb Code    14  stm32f10x_flash.o(i.FLASH_Lock)
+    FLASH_ProgramHalfWord                    0x080001e9   Thumb Code    60  stm32f10x_flash.o(i.FLASH_ProgramHalfWord)
+    FLASH_Unlock                             0x08000229   Thumb Code    12  stm32f10x_flash.o(i.FLASH_Unlock)
+    FLASH_WaitForLastOperation               0x08000241   Thumb Code    38  stm32f10x_flash.o(i.FLASH_WaitForLastOperation)
+    Flash_GetHigh                            0x08000269   Thumb Code    24  game.o(i.Flash_GetHigh)
+    Flash_Load                               0x08000285   Thumb Code    34  game.o(i.Flash_Load)
+    Flash_SaveHigh                           0x080002b5   Thumb Code    46  game.o(i.Flash_SaveHigh)
+    GPIO_Init                                0x080002e9   Thumb Code   278  stm32f10x_gpio.o(i.GPIO_Init)
+    GPIO_ReadInputDataBit                    0x080003ff   Thumb Code    18  stm32f10x_gpio.o(i.GPIO_ReadInputDataBit)
+    GPIO_WriteBit                            0x08000411   Thumb Code    10  stm32f10x_gpio.o(i.GPIO_WriteBit)
+    Game_Enter                               0x0800041b   Thumb Code    18  game.o(i.Game_Enter)
+    Game_Init                                0x0800042d   Thumb Code    18  game.o(i.Game_Init)
+    Game_Loop                                0x08000441   Thumb Code   352  game.o(i.Game_Loop)
+    Gomoku_Enter                             0x080005b9   Thumb Code    20  gomoku.o(i.Gomoku_Enter)
+    Gomoku_Loop                              0x080005cd   Thumb Code   426  gomoku.o(i.Gomoku_Loop)
+    HardFault_Handler                        0x080007a1   Thumb Code     4  stm32f10x_it.o(i.HardFault_Handler)
+    Key_Init                                 0x080007a5   Thumb Code    40  key.o(i.Key_Init)
+    Key_Scan                                 0x080007d1   Thumb Code   174  key.o(i.Key_Scan)
+    Maze_Enter                               0x0800088d   Thumb Code    42  maze.o(i.Maze_Enter)
+    Maze_Loop                                0x080008cd   Thumb Code   426  maze.o(i.Maze_Loop)
+    MemManage_Handler                        0x08000a95   Thumb Code     4  stm32f10x_it.o(i.MemManage_Handler)
+    NMI_Handler                              0x08000a99   Thumb Code     2  stm32f10x_it.o(i.NMI_Handler)
+    OLED_Clear                               0x08000a9b   Thumb Code    42  oled.o(i.OLED_Clear)
+    OLED_I2C_Init                            0x08000ac5   Thumb Code    76  oled.o(i.OLED_I2C_Init)
+    OLED_I2C_SendByte                        0x08000b15   Thumb Code    80  oled.o(i.OLED_I2C_SendByte)
+    OLED_I2C_Start                           0x08000b69   Thumb Code    48  oled.o(i.OLED_I2C_Start)
+    OLED_I2C_Stop                            0x08000b9d   Thumb Code    36  oled.o(i.OLED_I2C_Stop)
+    OLED_Init                                0x08000bc5   Thumb Code   174  oled.o(i.OLED_Init)
+    OLED_SetCursor                           0x08000c73   Thumb Code    34  oled.o(i.OLED_SetCursor)
+    OLED_WriteCommand                        0x08000c95   Thumb Code    32  oled.o(i.OLED_WriteCommand)
+    OLED_WriteData                           0x08000cb5   Thumb Code    32  oled.o(i.OLED_WriteData)
+    PendSV_Handler                           0x08000cd5   Thumb Code     2  stm32f10x_it.o(i.PendSV_Handler)
+    Plane_Enter                              0x08000cd9   Thumb Code    44  plane.o(i.Plane_Enter)
+    Plane_Loop                               0x08000d19   Thumb Code   286  plane.o(i.Plane_Loop)
+    RCC_APB2PeriphClockCmd                   0x08000e4d   Thumb Code    26  stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd)
+    SVC_Handler                              0x08000e6d   Thumb Code     2  stm32f10x_it.o(i.SVC_Handler)
+    SysTick_Handler                          0x08000f59   Thumb Code     2  stm32f10x_it.o(i.SysTick_Handler)
+    SystemInit                               0x08000f5d   Thumb Code    78  system_stm32f10x.o(i.SystemInit)
+    Tetris_Enter                             0x08000fbd   Thumb Code    44  tetris.o(i.Tetris_Enter)
+    Tetris_Loop                              0x08000ffd   Thumb Code   756  tetris.o(i.Tetris_Loop)
+    USART1_IRQHandler                        0x0800132d   Thumb Code   140  serial.o(i.USART1_IRQHandler)
+    USART_ClearITPendingBit                  0x080013cd   Thumb Code    30  stm32f10x_usart.o(i.USART_ClearITPendingBit)
+    USART_GetITStatus                        0x080013eb   Thumb Code    84  stm32f10x_usart.o(i.USART_GetITStatus)
+    USART_ReceiveData                        0x0800143f   Thumb Code    10  stm32f10x_usart.o(i.USART_ReceiveData)
+    UsageFault_Handler                       0x08001449   Thumb Code     4  stm32f10x_it.o(i.UsageFault_Handler)
+    __scatterload_copy                       0x0800144d   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x0800145b   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x0800145d   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    fb_clear                                 0x08001bb9   Thumb Code    30  game.o(i.fb_clear)
+    fb_clr_pixel                             0x08001be5   Thumb Code    62  game.o(i.fb_clr_pixel)
+    fb_draw_char                             0x08001c35   Thumb Code   214  game.o(i.fb_draw_char)
+    fb_draw_icon                             0x08001d1d   Thumb Code    68  game.o(i.fb_draw_icon)
+    fb_draw_pause_overlay                    0x08001d61   Thumb Code   292  game.o(i.fb_draw_pause_overlay)
+    fb_draw_pixel                            0x08001e9d   Thumb Code    64  game.o(i.fb_draw_pixel)
+    fb_draw_rect                             0x08001eed   Thumb Code    90  game.o(i.fb_draw_rect)
+    fb_draw_sprite                           0x08001f49   Thumb Code   202  game.o(i.fb_draw_sprite)
+    fb_draw_string                           0x08002021   Thumb Code    40  game.o(i.fb_draw_string)
+    fb_fill_rect                             0x08002049   Thumb Code    52  game.o(i.fb_fill_rect)
+    fb_flush                                 0x0800207d   Thumb Code   176  game.o(i.fb_flush)
+    fb_get_height                            0x0800213d   Thumb Code     6  game.o(i.fb_get_height)
+    fb_get_width                             0x08002149   Thumb Code     6  game.o(i.fb_get_width)
+    fb_set_orientation                       0x08002155   Thumb Code    54  game.o(i.fb_set_orientation)
+    main                                     0x080024e9   Thumb Code    38  main.o(i.main)
+    OLED_Character                           0x08003968   Data         672  oled.o(.constdata)
+    OLED_F8x16                               0x08003c08   Data        1520  oled.o(.constdata)
+    Region$$Table$$Base                      0x080042e0   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08004300   Number         0  anon$$obj.o(Region$$Table)
     Serial_RxFlag                            0x20000000   Data           1  serial.o(.data)
-    g_tick                                   0x20000034   Data           4  main.o(.data)
-    Serial_RxPacket                          0x20000038   Data         300  serial.o(.bss)
-    __initial_sp                             0x20000c98   Data           0  startup_stm32f10x_md.o(STACK)
+    g_tick                                   0x2000006c   Data           4  main.o(.data)
+    Serial_RxPacket                          0x20000070   Data         300  serial.o(.bss)
+    __initial_sp                             0x20000d98   Data           0  startup_stm32f10x_md.o(STACK)
 
 
 
@@ -1358,142 +1529,178 @@ Memory Map of the image
 
   Image Entry point : 0x080000ed
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000033dc, Max: 0x00010000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00004370, Max: 0x00010000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000033a4, Max: 0x00010000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00004300, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x000000ec   Data   RO            3    RESET               startup_stm32f10x_md.o
-    0x080000ec   0x080000ec   0x00000000   Code   RO         3918  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x080000ec   0x080000ec   0x00000004   Code   RO         3949    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x080000f0   0x080000f0   0x00000004   Code   RO         3952    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x080000f4   0x080000f4   0x00000000   Code   RO         3954    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x080000f4   0x080000f4   0x00000000   Code   RO         3956    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x080000f4   0x080000f4   0x00000008   Code   RO         3957    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x080000fc   0x080000fc   0x00000004   Code   RO         3964    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
-    0x08000100   0x08000100   0x00000000   Code   RO         3959    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
-    0x08000100   0x08000100   0x00000000   Code   RO         3961    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
-    0x08000100   0x08000100   0x00000004   Code   RO         3950    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x080000ec   0x080000ec   0x00000000   Code   RO         4051  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x080000ec   0x080000ec   0x00000004   Code   RO         4082    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x080000f0   0x080000f0   0x00000004   Code   RO         4085    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x080000f4   0x080000f4   0x00000000   Code   RO         4087    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x080000f4   0x080000f4   0x00000000   Code   RO         4089    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x080000f4   0x080000f4   0x00000008   Code   RO         4090    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x080000fc   0x080000fc   0x00000004   Code   RO         4097    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
+    0x08000100   0x08000100   0x00000000   Code   RO         4092    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
+    0x08000100   0x08000100   0x00000000   Code   RO         4094    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
+    0x08000100   0x08000100   0x00000004   Code   RO         4083    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x08000104   0x08000104   0x00000024   Code   RO            4    .text               startup_stm32f10x_md.o
-    0x08000128   0x08000128   0x00000024   Code   RO         3981    .text               mc_w.l(init.o)
-    0x0800014c   0x0800014c   0x00000004   Code   RO         3855    i.BusFault_Handler  stm32f10x_it.o
-    0x08000150   0x08000150   0x00000002   Code   RO         3856    i.DebugMon_Handler  stm32f10x_it.o
-    0x08000152   0x08000152   0x00000116   Code   RO         1347    i.GPIO_Init         stm32f10x_gpio.o
-    0x08000268   0x08000268   0x00000012   Code   RO         1351    i.GPIO_ReadInputDataBit  stm32f10x_gpio.o
-    0x0800027a   0x0800027a   0x0000000a   Code   RO         1358    i.GPIO_WriteBit     stm32f10x_gpio.o
-    0x08000284   0x08000284   0x00000010   Code   RO         3521    i.Game_Enter        game.o
-    0x08000294   0x08000294   0x00000010   Code   RO         3522    i.Game_Init         game.o
-    0x080002a4   0x080002a4   0x000000fc   Code   RO         3523    i.Game_Loop         game.o
-    0x080003a0   0x080003a0   0x00000014   Code   RO         3782    i.Gomoku_Enter      gomoku.o
-    0x080003b4   0x080003b4   0x000001d4   Code   RO         3783    i.Gomoku_Loop       gomoku.o
-    0x08000588   0x08000588   0x00000004   Code   RO         3857    i.HardFault_Handler  stm32f10x_it.o
-    0x0800058c   0x0800058c   0x0000002c   Code   RO         3485    i.Key_Init          key.o
-    0x080005b8   0x080005b8   0x0000004c   Code   RO         3486    i.Key_Scan          key.o
-    0x08000604   0x08000604   0x00000040   Code   RO         3737    i.Maze_Enter        maze.o
-    0x08000644   0x08000644   0x000001c8   Code   RO         3738    i.Maze_Loop         maze.o
-    0x0800080c   0x0800080c   0x00000004   Code   RO         3858    i.MemManage_Handler  stm32f10x_it.o
-    0x08000810   0x08000810   0x00000002   Code   RO         3859    i.NMI_Handler       stm32f10x_it.o
-    0x08000812   0x08000812   0x0000002a   Code   RO         3244    i.OLED_Clear        oled.o
-    0x0800083c   0x0800083c   0x00000050   Code   RO         3245    i.OLED_I2C_Init     oled.o
-    0x0800088c   0x0800088c   0x00000054   Code   RO         3246    i.OLED_I2C_SendByte  oled.o
-    0x080008e0   0x080008e0   0x00000034   Code   RO         3247    i.OLED_I2C_Start    oled.o
-    0x08000914   0x08000914   0x00000028   Code   RO         3248    i.OLED_I2C_Stop     oled.o
-    0x0800093c   0x0800093c   0x000000ae   Code   RO         3249    i.OLED_Init         oled.o
-    0x080009ea   0x080009ea   0x00000022   Code   RO         3253    i.OLED_SetCursor    oled.o
-    0x08000a0c   0x08000a0c   0x00000020   Code   RO         3268    i.OLED_WriteCommand  oled.o
-    0x08000a2c   0x08000a2c   0x00000020   Code   RO         3269    i.OLED_WriteData    oled.o
-    0x08000a4c   0x08000a4c   0x00000002   Code   RO         3860    i.PendSV_Handler    stm32f10x_it.o
-    0x08000a4e   0x08000a4e   0x00000002   PAD
-    0x08000a50   0x08000a50   0x0000003c   Code   RO         3662    i.Plane_Enter       plane.o
-    0x08000a8c   0x08000a8c   0x00000120   Code   RO         3663    i.Plane_Loop        plane.o
-    0x08000bac   0x08000bac   0x00000020   Code   RO         1777    i.RCC_APB2PeriphClockCmd  stm32f10x_rcc.o
-    0x08000bcc   0x08000bcc   0x00000002   Code   RO         3861    i.SVC_Handler       stm32f10x_it.o
-    0x08000bce   0x08000bce   0x00000008   Code   RO           24    i.SetSysClock       system_stm32f10x.o
-    0x08000bd6   0x08000bd6   0x00000002   PAD
-    0x08000bd8   0x08000bd8   0x000000e0   Code   RO           25    i.SetSysClockTo72   system_stm32f10x.o
-    0x08000cb8   0x08000cb8   0x00000002   Code   RO         3862    i.SysTick_Handler   stm32f10x_it.o
-    0x08000cba   0x08000cba   0x00000002   PAD
-    0x08000cbc   0x08000cbc   0x00000060   Code   RO           27    i.SystemInit        system_stm32f10x.o
-    0x08000d1c   0x08000d1c   0x000000a0   Code   RO         3419    i.USART1_IRQHandler  serial.o
-    0x08000dbc   0x08000dbc   0x0000001e   Code   RO         2957    i.USART_ClearITPendingBit  stm32f10x_usart.o
-    0x08000dda   0x08000dda   0x00000054   Code   RO         2964    i.USART_GetITStatus  stm32f10x_usart.o
-    0x08000e2e   0x08000e2e   0x0000000a   Code   RO         2974    i.USART_ReceiveData  stm32f10x_usart.o
-    0x08000e38   0x08000e38   0x00000004   Code   RO         3863    i.UsageFault_Handler  stm32f10x_it.o
-    0x08000e3c   0x08000e3c   0x0000000e   Code   RO         3993    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x08000e4a   0x08000e4a   0x00000002   Code   RO         3994    i.__scatterload_null  mc_w.l(handlers.o)
-    0x08000e4c   0x08000e4c   0x0000000e   Code   RO         3995    i.__scatterload_zeroinit  mc_w.l(handlers.o)
-    0x08000e5a   0x08000e5a   0x00000002   PAD
-    0x08000e5c   0x08000e5c   0x000000d8   Code   RO         3784    i.check_win         gomoku.o
-    0x08000f34   0x08000f34   0x0000003c   Code   RO         3785    i.draw_black_stone  gomoku.o
-    0x08000f70   0x08000f70   0x000000f8   Code   RO         3524    i.draw_gomoku_icon  game.o
-    0x08001068   0x08001068   0x0000017a   Code   RO         3525    i.draw_maze_icon    game.o
-    0x080011e2   0x080011e2   0x000000d4   Code   RO         3526    i.draw_plane_icon   game.o
-    0x080012b6   0x080012b6   0x00000090   Code   RO         3786    i.draw_white_stone  gomoku.o
-    0x08001346   0x08001346   0x00000002   PAD
-    0x08001348   0x08001348   0x0000002c   Code   RO         3527    i.fb_clear          game.o
-    0x08001374   0x08001374   0x00000050   Code   RO         3528    i.fb_clr_pixel      game.o
-    0x080013c4   0x080013c4   0x000000e8   Code   RO         3529    i.fb_draw_char      game.o
-    0x080014ac   0x080014ac   0x00000036   Code   RO         3530    i.fb_draw_icon      game.o
-    0x080014e2   0x080014e2   0x00000002   PAD
-    0x080014e4   0x080014e4   0x000001c0   Code   RO         3531    i.fb_draw_pause_overlay  game.o
-    0x080016a4   0x080016a4   0x00000050   Code   RO         3532    i.fb_draw_pixel     game.o
-    0x080016f4   0x080016f4   0x0000005a   Code   RO         3533    i.fb_draw_rect      game.o
-    0x0800174e   0x0800174e   0x00000002   PAD
-    0x08001750   0x08001750   0x000000d8   Code   RO         3534    i.fb_draw_sprite    game.o
-    0x08001828   0x08001828   0x00000028   Code   RO         3535    i.fb_draw_string    game.o
-    0x08001850   0x08001850   0x00000034   Code   RO         3536    i.fb_fill_rect      game.o
-    0x08001884   0x08001884   0x000000c0   Code   RO         3537    i.fb_flush          game.o
-    0x08001944   0x08001944   0x0000000c   Code   RO         3538    i.fb_get_height     game.o
-    0x08001950   0x08001950   0x0000000c   Code   RO         3539    i.fb_get_width      game.o
-    0x0800195c   0x0800195c   0x00000048   Code   RO         3540    i.fb_set_orientation  game.o
-    0x080019a4   0x080019a4   0x00000050   Code   RO         3664    i.fire_bullet       plane.o
-    0x080019f4   0x080019f4   0x000001e8   Code   RO         3739    i.gen_maze          maze.o
-    0x08001bdc   0x08001bdc   0x0000002c   Code   RO         3665    i.hit_test          plane.o
-    0x08001c08   0x08001c08   0x00000028   Code   RO         3831    i.main              main.o
-    0x08001c30   0x08001c30   0x00000024   Code   RO         3666    i.my_rand           plane.o
-    0x08001c54   0x08001c54   0x00000024   Code   RO         3740    i.my_rand           maze.o
-    0x08001c78   0x08001c78   0x0000021c   Code   RO         3787    i.render_board_frame  gomoku.o
-    0x08001e94   0x08001e94   0x00000164   Code   RO         3667    i.render_game_frame  plane.o
-    0x08001ff8   0x08001ff8   0x00000174   Code   RO         3668    i.render_gameover   plane.o
-    0x0800216c   0x0800216c   0x000000b8   Code   RO         3541    i.render_hub        game.o
-    0x08002224   0x08002224   0x0000024c   Code   RO         3741    i.render_maze_frame  maze.o
-    0x08002470   0x08002470   0x000000a8   Code   RO         3669    i.render_menu       plane.o
-    0x08002518   0x08002518   0x00000084   Code   RO         3742    i.render_win        maze.o
-    0x0800259c   0x0800259c   0x000000c8   Code   RO         3670    i.reset             plane.o
-    0x08002664   0x08002664   0x00000078   Code   RO         3788    i.reset_board       gomoku.o
-    0x080026dc   0x080026dc   0x00000060   Code   RO         3671    i.spawn_enemy       plane.o
-    0x0800273c   0x0800273c   0x00000044   Code   RO         3672    i.spawn_explosion   plane.o
-    0x08002780   0x08002780   0x0000030c   Code   RO         3673    i.update            plane.o
-    0x08002a8c   0x08002a8c   0x00000890   Data   RO         3270    .constdata          oled.o
-    0x0800331c   0x0800331c   0x00000010   Data   RO         3543    .constdata          game.o
-    0x0800332c   0x0800332c   0x0000002d   Data   RO         3675    .constdata          plane.o
-    0x08003359   0x08003359   0x00000010   Data   RO         3744    .constdata          maze.o
-    0x08003369   0x08003369   0x00000003   PAD
-    0x0800336c   0x0800336c   0x00000017   Data   RO         3544    .conststring        game.o
-    0x08003383   0x08003383   0x00000001   PAD
-    0x08003384   0x08003384   0x00000020   Data   RO         3991    Region$$Table       anon$$obj.o
+    0x08000128   0x08000128   0x00000024   Code   RO         4114    .text               mc_w.l(init.o)
+    0x0800014c   0x0800014c   0x00000004   Code   RO         3988    i.BusFault_Handler  stm32f10x_it.o
+    0x08000150   0x08000150   0x00000002   Code   RO         3989    i.DebugMon_Handler  stm32f10x_it.o
+    0x08000152   0x08000152   0x00000002   PAD
+    0x08000154   0x08000154   0x0000004c   Code   RO         1046    i.FLASH_ErasePage   stm32f10x_flash.o
+    0x080001a0   0x080001a0   0x00000034   Code   RO         1047    i.FLASH_GetBank1Status  stm32f10x_flash.o
+    0x080001d4   0x080001d4   0x00000014   Code   RO         1056    i.FLASH_Lock        stm32f10x_flash.o
+    0x080001e8   0x080001e8   0x00000040   Code   RO         1059    i.FLASH_ProgramHalfWord  stm32f10x_flash.o
+    0x08000228   0x08000228   0x00000018   Code   RO         1064    i.FLASH_Unlock      stm32f10x_flash.o
+    0x08000240   0x08000240   0x00000026   Code   RO         1068    i.FLASH_WaitForLastOperation  stm32f10x_flash.o
+    0x08000266   0x08000266   0x00000002   PAD
+    0x08000268   0x08000268   0x0000001c   Code   RO         3518    i.Flash_GetHigh     game.o
+    0x08000284   0x08000284   0x00000030   Code   RO         3519    i.Flash_Load        game.o
+    0x080002b4   0x080002b4   0x00000034   Code   RO         3520    i.Flash_SaveHigh    game.o
+    0x080002e8   0x080002e8   0x00000116   Code   RO         1347    i.GPIO_Init         stm32f10x_gpio.o
+    0x080003fe   0x080003fe   0x00000012   Code   RO         1351    i.GPIO_ReadInputDataBit  stm32f10x_gpio.o
+    0x08000410   0x08000410   0x0000000a   Code   RO         1358    i.GPIO_WriteBit     stm32f10x_gpio.o
+    0x0800041a   0x0800041a   0x00000012   Code   RO         3521    i.Game_Enter        game.o
+    0x0800042c   0x0800042c   0x00000012   Code   RO         3522    i.Game_Init         game.o
+    0x0800043e   0x0800043e   0x00000002   PAD
+    0x08000440   0x08000440   0x00000178   Code   RO         3523    i.Game_Loop         game.o
+    0x080005b8   0x080005b8   0x00000014   Code   RO         3807    i.Gomoku_Enter      gomoku.o
+    0x080005cc   0x080005cc   0x000001d4   Code   RO         3808    i.Gomoku_Loop       gomoku.o
+    0x080007a0   0x080007a0   0x00000004   Code   RO         3990    i.HardFault_Handler  stm32f10x_it.o
+    0x080007a4   0x080007a4   0x0000002c   Code   RO         3485    i.Key_Init          key.o
+    0x080007d0   0x080007d0   0x000000bc   Code   RO         3486    i.Key_Scan          key.o
+    0x0800088c   0x0800088c   0x00000040   Code   RO         3762    i.Maze_Enter        maze.o
+    0x080008cc   0x080008cc   0x000001c8   Code   RO         3763    i.Maze_Loop         maze.o
+    0x08000a94   0x08000a94   0x00000004   Code   RO         3991    i.MemManage_Handler  stm32f10x_it.o
+    0x08000a98   0x08000a98   0x00000002   Code   RO         3992    i.NMI_Handler       stm32f10x_it.o
+    0x08000a9a   0x08000a9a   0x0000002a   Code   RO         3244    i.OLED_Clear        oled.o
+    0x08000ac4   0x08000ac4   0x00000050   Code   RO         3245    i.OLED_I2C_Init     oled.o
+    0x08000b14   0x08000b14   0x00000054   Code   RO         3246    i.OLED_I2C_SendByte  oled.o
+    0x08000b68   0x08000b68   0x00000034   Code   RO         3247    i.OLED_I2C_Start    oled.o
+    0x08000b9c   0x08000b9c   0x00000028   Code   RO         3248    i.OLED_I2C_Stop     oled.o
+    0x08000bc4   0x08000bc4   0x000000ae   Code   RO         3249    i.OLED_Init         oled.o
+    0x08000c72   0x08000c72   0x00000022   Code   RO         3253    i.OLED_SetCursor    oled.o
+    0x08000c94   0x08000c94   0x00000020   Code   RO         3268    i.OLED_WriteCommand  oled.o
+    0x08000cb4   0x08000cb4   0x00000020   Code   RO         3269    i.OLED_WriteData    oled.o
+    0x08000cd4   0x08000cd4   0x00000002   Code   RO         3993    i.PendSV_Handler    stm32f10x_it.o
+    0x08000cd6   0x08000cd6   0x00000002   PAD
+    0x08000cd8   0x08000cd8   0x00000040   Code   RO         3687    i.Plane_Enter       plane.o
+    0x08000d18   0x08000d18   0x00000134   Code   RO         3688    i.Plane_Loop        plane.o
+    0x08000e4c   0x08000e4c   0x00000020   Code   RO         1777    i.RCC_APB2PeriphClockCmd  stm32f10x_rcc.o
+    0x08000e6c   0x08000e6c   0x00000002   Code   RO         3994    i.SVC_Handler       stm32f10x_it.o
+    0x08000e6e   0x08000e6e   0x00000008   Code   RO           24    i.SetSysClock       system_stm32f10x.o
+    0x08000e76   0x08000e76   0x00000002   PAD
+    0x08000e78   0x08000e78   0x000000e0   Code   RO           25    i.SetSysClockTo72   system_stm32f10x.o
+    0x08000f58   0x08000f58   0x00000002   Code   RO         3995    i.SysTick_Handler   stm32f10x_it.o
+    0x08000f5a   0x08000f5a   0x00000002   PAD
+    0x08000f5c   0x08000f5c   0x00000060   Code   RO           27    i.SystemInit        system_stm32f10x.o
+    0x08000fbc   0x08000fbc   0x00000040   Code   RO         3856    i.Tetris_Enter      tetris.o
+    0x08000ffc   0x08000ffc   0x00000330   Code   RO         3857    i.Tetris_Loop       tetris.o
+    0x0800132c   0x0800132c   0x000000a0   Code   RO         3419    i.USART1_IRQHandler  serial.o
+    0x080013cc   0x080013cc   0x0000001e   Code   RO         2957    i.USART_ClearITPendingBit  stm32f10x_usart.o
+    0x080013ea   0x080013ea   0x00000054   Code   RO         2964    i.USART_GetITStatus  stm32f10x_usart.o
+    0x0800143e   0x0800143e   0x0000000a   Code   RO         2974    i.USART_ReceiveData  stm32f10x_usart.o
+    0x08001448   0x08001448   0x00000004   Code   RO         3996    i.UsageFault_Handler  stm32f10x_it.o
+    0x0800144c   0x0800144c   0x0000000e   Code   RO         4126    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x0800145a   0x0800145a   0x00000002   Code   RO         4127    i.__scatterload_null  mc_w.l(handlers.o)
+    0x0800145c   0x0800145c   0x0000000e   Code   RO         4128    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x0800146a   0x0800146a   0x00000002   PAD
+    0x0800146c   0x0800146c   0x000000d8   Code   RO         3809    i.check_win         gomoku.o
+    0x08001544   0x08001544   0x000000c4   Code   RO         3858    i.clear_lines       tetris.o
+    0x08001608   0x08001608   0x00000080   Code   RO         3859    i.collides          tetris.o
+    0x08001688   0x08001688   0x0000003c   Code   RO         3810    i.draw_black_stone  gomoku.o
+    0x080016c4   0x080016c4   0x00000020   Code   RO         3860    i.draw_board_frame  tetris.o
+    0x080016e4   0x080016e4   0x00000028   Code   RO         3861    i.draw_cell         tetris.o
+    0x0800170c   0x0800170c   0x000000f8   Code   RO         3524    i.draw_gomoku_icon  game.o
+    0x08001804   0x08001804   0x0000017a   Code   RO         3525    i.draw_maze_icon    game.o
+    0x0800197e   0x0800197e   0x000000d4   Code   RO         3526    i.draw_plane_icon   game.o
+    0x08001a52   0x08001a52   0x00000014   Code   RO         3862    i.draw_small_cell   tetris.o
+    0x08001a66   0x08001a66   0x000000a2   Code   RO         3527    i.draw_tetris_icon  game.o
+    0x08001b08   0x08001b08   0x00000090   Code   RO         3811    i.draw_white_stone  gomoku.o
+    0x08001b98   0x08001b98   0x00000020   Code   RO         3863    i.drop_interval     tetris.o
+    0x08001bb8   0x08001bb8   0x0000002c   Code   RO         3528    i.fb_clear          game.o
+    0x08001be4   0x08001be4   0x00000050   Code   RO         3529    i.fb_clr_pixel      game.o
+    0x08001c34   0x08001c34   0x000000e8   Code   RO         3530    i.fb_draw_char      game.o
+    0x08001d1c   0x08001d1c   0x00000044   Code   RO         3531    i.fb_draw_icon      game.o
+    0x08001d60   0x08001d60   0x0000013c   Code   RO         3532    i.fb_draw_pause_overlay  game.o
+    0x08001e9c   0x08001e9c   0x00000050   Code   RO         3533    i.fb_draw_pixel     game.o
+    0x08001eec   0x08001eec   0x0000005a   Code   RO         3534    i.fb_draw_rect      game.o
+    0x08001f46   0x08001f46   0x00000002   PAD
+    0x08001f48   0x08001f48   0x000000d8   Code   RO         3535    i.fb_draw_sprite    game.o
+    0x08002020   0x08002020   0x00000028   Code   RO         3536    i.fb_draw_string    game.o
+    0x08002048   0x08002048   0x00000034   Code   RO         3537    i.fb_fill_rect      game.o
+    0x0800207c   0x0800207c   0x000000c0   Code   RO         3538    i.fb_flush          game.o
+    0x0800213c   0x0800213c   0x0000000c   Code   RO         3539    i.fb_get_height     game.o
+    0x08002148   0x08002148   0x0000000c   Code   RO         3540    i.fb_get_width      game.o
+    0x08002154   0x08002154   0x00000048   Code   RO         3541    i.fb_set_orientation  game.o
+    0x0800219c   0x0800219c   0x00000050   Code   RO         3689    i.fire_bullet       plane.o
+    0x080021ec   0x080021ec   0x0000003c   Code   RO         3542    i.flash_write       game.o
+    0x08002228   0x08002228   0x000001e8   Code   RO         3764    i.gen_maze          maze.o
+    0x08002410   0x08002410   0x00000028   Code   RO         3864    i.get_next_piece    tetris.o
+    0x08002438   0x08002438   0x0000002c   Code   RO         3690    i.hit_test          plane.o
+    0x08002464   0x08002464   0x00000084   Code   RO         3865    i.lock_piece        tetris.o
+    0x080024e8   0x080024e8   0x0000002c   Code   RO         3961    i.main              main.o
+    0x08002514   0x08002514   0x00000024   Code   RO         3691    i.my_rand           plane.o
+    0x08002538   0x08002538   0x00000024   Code   RO         3765    i.my_rand           maze.o
+    0x0800255c   0x0800255c   0x00000024   Code   RO         3866    i.my_rand           tetris.o
+    0x08002580   0x08002580   0x0000004c   Code   RO         3867    i.refill_bag        tetris.o
+    0x080025cc   0x080025cc   0x0000021c   Code   RO         3812    i.render_board_frame  gomoku.o
+    0x080027e8   0x080027e8   0x00000178   Code   RO         3868    i.render_game       tetris.o
+    0x08002960   0x08002960   0x00000164   Code   RO         3692    i.render_game_frame  plane.o
+    0x08002ac4   0x08002ac4   0x00000174   Code   RO         3693    i.render_gameover   plane.o
+    0x08002c38   0x08002c38   0x00000174   Code   RO         3869    i.render_gameover   tetris.o
+    0x08002dac   0x08002dac   0x00000118   Code   RO         3543    i.render_hub        game.o
+    0x08002ec4   0x08002ec4   0x0000024c   Code   RO         3766    i.render_maze_frame  maze.o
+    0x08003110   0x08003110   0x000000a8   Code   RO         3694    i.render_menu       plane.o
+    0x080031b8   0x080031b8   0x000000dc   Code   RO         3870    i.render_menu       tetris.o
+    0x08003294   0x08003294   0x00000058   Code   RO         3871    i.render_preview    tetris.o
+    0x080032ec   0x080032ec   0x00000084   Code   RO         3767    i.render_win        maze.o
+    0x08003370   0x08003370   0x000000c8   Code   RO         3695    i.reset             plane.o
+    0x08003438   0x08003438   0x00000078   Code   RO         3813    i.reset_board       gomoku.o
+    0x080034b0   0x080034b0   0x0000009c   Code   RO         3872    i.reset_game        tetris.o
+    0x0800354c   0x0800354c   0x00000060   Code   RO         3696    i.spawn_enemy       plane.o
+    0x080035ac   0x080035ac   0x00000044   Code   RO         3697    i.spawn_explosion   plane.o
+    0x080035f0   0x080035f0   0x0000005c   Code   RO         3873    i.spawn_piece       tetris.o
+    0x0800364c   0x0800364c   0x0000031c   Code   RO         3698    i.update            plane.o
+    0x08003968   0x08003968   0x00000890   Data   RO         3270    .constdata          oled.o
+    0x080041f8   0x080041f8   0x00000010   Data   RO         3545    .constdata          game.o
+    0x08004208   0x08004208   0x0000002d   Data   RO         3700    .constdata          plane.o
+    0x08004235   0x08004235   0x00000010   Data   RO         3769    .constdata          maze.o
+    0x08004245   0x08004245   0x00000001   PAD
+    0x08004246   0x08004246   0x0000007a   Data   RO         3875    .constdata          tetris.o
+    0x080042c0   0x080042c0   0x0000001f   Data   RO         3546    .conststring        game.o
+    0x080042df   0x080042df   0x00000001   PAD
+    0x080042e0   0x080042e0   0x00000020   Data   RO         4124    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080033a4, Size: 0x00000c98, Max: 0x00005000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08004300, Size: 0x00000d98, Max: 0x00005000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x080033a4   0x00000003   Data   RW         3422    .data               serial.o
-    0x20000003   0x080033a7   0x00000008   Data   RW         3545    .data               game.o
-    0x2000000b   0x080033af   0x00000001   PAD
-    0x2000000c   0x080033b0   0x00000010   Data   RW         3676    .data               plane.o
-    0x2000001c   0x080033c0   0x0000000d   Data   RW         3745    .data               maze.o
-    0x20000029   0x080033cd   0x0000000a   Data   RW         3790    .data               gomoku.o
-    0x20000033   0x080033d7   0x00000001   PAD
-    0x20000034   0x080033d8   0x00000004   Data   RW         3832    .data               main.o
-    0x20000038        -       0x0000012c   Zero   RW         3421    .bss                serial.o
-    0x20000164        -       0x00000400   Zero   RW         3542    .bss                game.o
-    0x20000564        -       0x0000003c   Zero   RW         3674    .bss                plane.o
-    0x200005a0        -       0x000002b4   Zero   RW         3743    .bss                maze.o
-    0x20000854        -       0x00000040   Zero   RW         3789    .bss                gomoku.o
-    0x20000894   0x080033dc   0x00000004   PAD
-    0x20000898        -       0x00000400   Zero   RW            1    STACK               startup_stm32f10x_md.o
+    0x20000000   0x08004300   0x00000003   Data   RW         3422    .data               serial.o
+    0x20000003   0x08004303   0x00000006   Data   RW         3487    .data               key.o
+    0x20000009   0x08004309   0x00000003   PAD
+    0x2000000c   0x0800430c   0x00000012   Data   RW         3547    .data               game.o
+    0x2000001e   0x0800431e   0x00000002   PAD
+    0x20000020   0x08004320   0x00000010   Data   RW         3701    .data               plane.o
+    0x20000030   0x08004330   0x0000000d   Data   RW         3770    .data               maze.o
+    0x2000003d   0x0800433d   0x0000000a   Data   RW         3815    .data               gomoku.o
+    0x20000047   0x08004347   0x00000001   PAD
+    0x20000048   0x08004348   0x00000021   Data   RW         3876    .data               tetris.o
+    0x20000069   0x08004369   0x00000003   PAD
+    0x2000006c   0x0800436c   0x00000004   Data   RW         3962    .data               main.o
+    0x20000070        -       0x0000012c   Zero   RW         3421    .bss                serial.o
+    0x2000019c        -       0x00000400   Zero   RW         3544    .bss                game.o
+    0x2000059c        -       0x0000003c   Zero   RW         3699    .bss                plane.o
+    0x200005d8        -       0x000002b4   Zero   RW         3768    .bss                maze.o
+    0x2000088c        -       0x00000040   Zero   RW         3814    .bss                gomoku.o
+    0x200008cc        -       0x000000c8   Zero   RW         3874    .bss                tetris.o
+    0x20000994   0x08004370   0x00000004   PAD
+    0x20000998        -       0x00000400   Zero   RW            1    STACK               startup_stm32f10x_md.o
 
 
 ==============================================================================
@@ -1504,26 +1711,28 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
          0          0          0          0          0       4508   core_cm3.o
-      2930        240         39          8       1024      13325   game.o
+      3386        232         47         18       1024      16035   game.o
       1568        190          0         10         64       5657   gomoku.o
-       120          8          0          0          0        914   key.o
-        40          6          0          4          0        904   main.o
+       232         18          0          6          0       1486   key.o
+        44          6          0          4          0        908   main.o
       1764        212         16         13        692       5013   maze.o
          0          0          0          0          0     201656   misc.o
        570         16       2192          0          0       4796   oled.o
-      2548        368         45         16         60       8211   plane.o
+      2588        368         45         16         60       8331   plane.o
        160         20          0          3        300       1192   serial.o
         36          8        236          0       1024        788   startup_stm32f10x_md.o
+       274         30          0          0          0       9326   stm32f10x_flash.o
        306          0          0          0          0      11192   stm32f10x_gpio.o
         26          0          0          0          0       3478   stm32f10x_it.o
         32          6          0          0          0        509   stm32f10x_rcc.o
        124          0          0          0          0       9078   stm32f10x_usart.o
        328         28          0          0          0      10013   system_stm32f10x.o
+      2916        444        122         33        200      11769   tetris.o
 
     ----------------------------------------------------------------------
-     10564       1102       2564         56       3168     281234   Object Totals
+     14368       1578       2692        112       3368     305735   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        12          0          4          2          4          0   (incl. Padding)
+        14          0          2          9          4          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1561,15 +1770,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     10656       1118       2564         56       3168     277658   Grand Totals
-     10656       1118       2564         56       3168     277658   ELF Image Totals
-     10656       1118       2564         56          0          0   ROM Totals
+     14460       1594       2692        112       3368     300651   Grand Totals
+     14460       1594       2692        112       3368     300651   ELF Image Totals
+     14460       1594       2692        112          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                13220 (  12.91kB)
-    Total RW  Size (RW Data + ZI Data)              3224 (   3.15kB)
-    Total ROM Size (Code + RO Data + RW Data)      13276 (  12.96kB)
+    Total RO  Size (Code + RO Data)                17152 (  16.75kB)
+    Total RW  Size (RW Data + ZI Data)              3480 (   3.40kB)
+    Total ROM Size (Code + RO Data + RW Data)      17264 (  16.86kB)
 
 ==============================================================================
 
